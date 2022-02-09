@@ -1,0 +1,204 @@
+# high_card
+T♣ 5♥ 7♦ J♥ 4♥ 2♥ 8♦ - high_card - J♥ T♣ 8♦ 7♦ 5♥
+3♠ 2♦ T♦ 7♥ 8♠ 6♥ J♦ - high_card - J♦ T♦ 8♠ 7♥ 6♥
+8♦ 4♦ J♠ 2♥ 5♦ Q♦ 7♠ - high_card - Q♦ J♠ 8♦ 7♠ 5♦
+K♦ 8♠ 9♠ 7♣ 2♠ 3♠ 6♦ - high_card - K♦ 9♠ 8♠ 7♣ 6♦
+J♦ 2♥ 5♣ A♠ 6♣ Q♣ 4♦ - high_card - A♠ Q♣ J♦ 6♣ 5♣
+A♥ Q♥ 3♣ J♦ K♣ 4♠ 5♠ - high_card - A♥ K♣ Q♥ J♦ 5♠
+Q♣ A♠ 2♠ J♠ 5♣ 6♥ K♦ - high_card - A♠ K♦ Q♣ J♠ 6♥
+3♦ A♠ Q♥ K♠ 7♥ J♦ 8♠ - high_card - A♠ K♠ Q♥ J♦ 8♠
+2♥ 6♣ 7♣ K♥ 5♣ A♦ Q♠ - high_card - A♦ K♥ Q♠ 7♣ 6♣
+7♠ K♠ 6♣ 2♠ 4♦ A♣ Q♠ - high_card - A♣ K♠ Q♠ 7♠ 6♣
+6♣ 5♠ 9♣ Q♥ 7♦ A♥ K♠ - high_card - A♥ K♠ Q♥ 9♣ 7♦
+9♣ 7♦ Q♦ K♦ A♣ 6♦ 5♥ - high_card - A♣ K♦ Q♦ 9♣ 7♦
+5♥ Q♦ 2♠ A♣ 8♣ 9♥ K♠ - high_card - A♣ K♠ Q♦ 9♥ 8♣
+A♦ 3♣ 4♥ Q♠ 8♣ 9♦ K♠ - high_card - A♦ K♠ Q♠ 9♦ 8♣
+T♥ 4♠ 2♦ K♣ 3♥ Q♦ A♣ - high_card - A♣ K♣ Q♦ T♥ 4♠
+2♥ 8♣ A♦ T♥ 6♥ Q♦ K♦ - high_card - A♦ K♦ Q♦ T♥ 8♣
+
+# random pair tests, test the order of cards and kickers
+7♥ Q♥ K♥ J♦ T♣ K♠ 5♠ - pair - K♥ K♠ Q♥ J♦ T♣
+7♥ 2♣ K♣ 5♠ K♦ 6♥ A♥ - pair - K♦ K♣ A♥ 7♥ 6♥
+3♣ K♦ K♥ 2♠ 4♣ T♠ A♣ - pair - K♥ K♦ A♣ T♠ 4♣
+T♦ 2♠ K♠ 3♦ A♦ K♣ 7♠ - pair - K♣ K♠ A♦ T♦ 7♠
+8♥ K♠ A♣ 2♦ K♥ T♠ 6♣ - pair - K♥ K♠ A♣ T♠ 8♥
+T♦ A♦ 6♠ 7♥ K♦ K♥ 9♥ - pair - K♦ K♥ A♦ T♦ 9♥
+6♦ K♥ K♣ Q♦ 5♣ A♦ 7♣ - pair - K♣ K♥ A♦ Q♦ 7♣
+K♦ Q♠ 9♣ 7♠ 3♦ K♠ A♦ - pair - K♠ K♦ A♦ Q♠ 9♣
+7♣ 5♥ K♣ Q♥ J♦ A♠ K♥ - pair - K♣ K♥ A♠ Q♥ J♦
+Q♥ A♠ 9♥ 4♦ J♦ K♠ K♦ - pair - K♦ K♠ A♠ Q♥ J♦
+8♥ Q♦ 4♥ J♣ A♠ K♥ K♠ - pair - K♥ K♠ A♠ Q♦ J♣
+3♥ A♣ T♠ 5♦ A♦ 8♦ 6♥ - pair - A♦ A♣ T♠ 8♦ 6♥
+A♥ 5♠ 6♥ 9♠ A♦ 3♠ T♥ - pair - A♦ A♥ T♥ 9♠ 6♥
+A♠ 2♠ T♦ A♦ 4♦ 9♥ J♣ - pair - A♦ A♠ J♣ T♦ 9♥
+A♦ A♣ 2♣ 6♠ Q♦ 7♣ 3♥ - pair - A♦ A♣ Q♦ 7♣ 6♠
+5♦ A♠ 8♠ 6♠ 4♣ A♥ Q♣ - pair - A♥ A♠ Q♣ 8♠ 6♠
+4♠ 6♥ 7♣ Q♦ 9♦ A♠ A♥ - pair - A♥ A♠ Q♦ 9♦ 7♣
+A♠ 5♣ A♦ Q♥ 7♦ 2♥ 9♠ - pair - A♦ A♠ Q♥ 9♠ 7♦
+8♣ 9♦ A♥ 2♥ A♣ Q♣ 5♠ - pair - A♣ A♥ Q♣ 9♦ 8♣
+9♥ 2♦ 8♦ Q♣ 6♠ A♦ A♠ - pair - A♦ A♠ Q♣ 9♥ 8♦
+Q♦ 9♥ 3♣ 2♥ A♣ A♠ 8♠ - pair - A♣ A♠ Q♦ 9♥ 8♠
+A♥ 6♠ A♠ 7♥ 5♠ K♦ 3♥ - pair - A♠ A♥ K♦ 7♥ 6♠
+2♥ 5♦ A♦ A♣ K♠ 3♦ 8♥ - pair - A♦ A♣ K♠ 8♥ 5♦
+7♣ T♦ 4♦ 5♠ K♥ A♣ A♠ - pair - A♣ A♠ K♥ T♦ 7♣
+A♣ 3♦ A♠ 8♣ T♦ 7♥ K♥ - pair - A♠ A♣ K♥ T♦ 8♣
+2♥ 7♦ Q♣ 6♠ T♣ T♠ A♥ - pair - T♣ T♠ A♥ Q♣ 7♦
+A♦ Q♥ T♥ 9♦ 8♥ T♠ 6♦ - pair - T♥ T♠ A♦ Q♥ 9♦
+Q♠ 7♠ 4♣ T♥ 9♦ T♠ A♦ - pair - T♥ T♠ A♦ Q♠ 9♦
+T♦ T♠ 7♣ A♦ J♣ Q♦ 9♥ - pair - T♦ T♠ A♦ Q♦ J♣
+6♥ T♠ 7♠ J♣ Q♦ A♣ T♦ - pair - T♦ T♠ A♣ Q♦ J♣
+5♥ 6♠ K♠ A♦ T♣ T♠ 7♣ - pair - T♣ T♠ A♦ K♠ 7♣
+6♠ T♥ T♠ K♠ 2♣ Q♣ A♥ - pair - T♠ T♥ A♥ K♠ Q♣
+T♠ A♣ Q♣ T♥ K♣ 6♦ 4♥ - pair - T♥ T♠ A♣ K♣ Q♣
+8♠ T♥ 3♥ 7♣ 2♥ J♦ J♠ - pair - J♦ J♠ T♥ 8♠ 7♣
+6♦ 4♥ T♠ 9♣ 5♥ J♠ J♥ - pair - J♥ J♠ T♠ 9♣ 6♦
+7♠ 2♣ 8♠ 5♠ J♥ Q♠ J♣ - pair - J♣ J♥ Q♠ 8♠ 7♠
+J♣ 6♠ 9♣ Q♥ J♥ 8♦ 7♠ - pair - J♥ J♣ Q♥ 9♣ 8♦
+K♦ 5♥ J♣ 8♥ J♦ 2♦ 4♥ - pair - J♦ J♣ K♦ 8♥ 5♥
+7♣ 9♥ 8♥ 4♦ J♣ K♥ J♦ - pair - J♦ J♣ K♥ 9♥ 8♥
+8♦ 2♦ K♠ 9♠ J♣ 4♣ J♦ - pair - J♦ J♣ K♠ 9♠ 8♦
+J♥ 5♣ T♦ 4♣ 6♥ J♠ K♦ - pair - J♠ J♥ K♦ T♦ 6♥
+7♠ 9♠ 4♦ T♦ J♥ J♠ K♥ - pair - J♥ J♠ K♥ T♦ 9♠
+J♥ 2♥ J♦ 9♠ 7♠ T♠ K♥ - pair - J♦ J♥ K♥ T♠ 9♠
+K♥ 6♦ 2♦ J♦ 5♥ J♠ Q♦ - pair - J♦ J♠ K♥ Q♦ 6♦
+J♣ K♥ 2♦ 7♦ J♠ Q♣ 5♥ - pair - J♠ J♣ K♥ Q♣ 7♦
+Q♠ 4♦ 2♦ 7♠ K♥ J♠ J♣ - pair - J♣ J♠ K♥ Q♠ 7♠
+K♦ 8♣ 9♠ J♥ Q♦ J♠ 2♣ - pair - J♥ J♠ K♦ Q♦ 9♠
+Q♥ K♣ 9♦ 4♦ 3♠ J♠ J♥ - pair - J♥ J♠ K♣ Q♥ 9♦
+Q♥ T♠ 6♠ 4♦ J♠ K♠ J♥ - pair - J♥ J♠ K♠ Q♥ T♠
+4♣ J♣ A♠ 9♦ 3♣ J♠ 6♣ - pair - J♠ J♣ A♠ 9♦ 6♣
+2♦ A♠ 9♠ 6♥ 4♦ J♠ J♥ - pair - J♥ J♠ A♠ 9♠ 6♥
+4♣ 9♥ J♥ T♠ 3♠ 4♥ Q♣ - pair - 4♥ 4♣ Q♣ J♥ T♠
+2♥ 4♦ A♥ 2♦ J♥ 6♥ T♦ - pair - 2♦ 2♥ A♥ J♥ T♦
+J♥ Q♠ K♠ 9♣ 6♦ 6♠ A♠ - pair - 6♦ 6♠ A♠ K♠ Q♠
+2♥ 4♦ A♥ 2♦ J♥ 6♥ T♦ - pair - 2♦ 2♥ A♥ J♥ T♦
+
+# two_pair
+Q♦ K♥ J♠ K♠ 9♠ Q♣ 8♦ - two_pair - K♠ K♥ Q♣ Q♦ J♠
+7♣ 8♦ 5♠ 2♦ 2♠ A♥ A♦ - two_pair - A♦ A♥ 2♦ 2♠ 8♦
+J♠ 5♣ 7♠ A♠ 2♣ A♥ 2♥ - two_pair - A♥ A♠ 2♣ 2♥ J♠
+3♥ K♦ 4♠ Q♦ Q♥ 3♦ 8♥ - two_pair - Q♦ Q♥ 3♦ 3♥ K♦
+Q♥ Q♣ J♠ 3♦ 3♣ 5♣ 4♥ - two_pair - Q♣ Q♥ 3♦ 3♣ J♠
+2♦ 5♠ 2♥ 9♣ 6♥ 9♠ T♦ - two_pair - 9♣ 9♠ 2♥ 2♦ T♦
+2♣ 9♥ 2♦ A♥ 3♥ 6♦ 9♣ - two_pair - 9♣ 9♥ 2♦ 2♣ A♥
+6♦ 7♥ A♥ 7♠ Q♣ 6♥ 2♦ - two_pair - 7♠ 7♥ 6♥ 6♦ A♥
+5♣ T♦ 4♠ 4♦ A♦ 6♠ 5♦ - two_pair - 5♦ 5♣ 4♦ 4♠ A♦
+3♣ Q♠ 2♠ 4♥ J♥ 3♦ 2♦ - two_pair - 3♦ 3♣ 2♦ 2♠ Q♠
+Q♠ K♥ 3♠ 2♣ 2♠ 3♣ 7♠ - two_pair - 3♣ 3♠ 2♣ 2♠ K♥
+6♣ 3♠ 3♦ 2♠ 4♠ Q♦ 2♦ - two_pair - 3♦ 3♠ 2♦ 2♠ Q♦
+2♥ 7♥ 3♠ 2♠ 5♥ Q♠ 3♣ - two_pair - 3♣ 3♠ 2♠ 2♥ Q♠
+
+# two_pair with 3 pairs select the strongest two
+A♥ 6♠ A♠ 7♥ 5♠ 6♦ 5♥ - two_pair - A♠ A♥ 6♦ 6♠ 7♥
+2♥ 8♦ A♦ A♣ K♠ K♦ 8♥ - two_pair - A♦ A♣ K♦ K♠ 8♥
+7♣ T♦ 5♦ 5♠ T♥ A♣ A♠ - two_pair - A♣ A♠ T♥ T♦ 7♣
+3♣ J♠ 2♠ 4♥ J♥ 3♦ 2♦ - two_pair - J♥ J♠ 3♦ 3♣ 4♥
+2♦ 3♥ 7♦ J♦ 3♦ A♠ 7♠ - two_pair - 7♦ 7♠ 3♦ 3♥ A♠
+Q♠ K♥ 3♠ 2♣ 2♠ 3♣ K♠ - two_pair - K♠ K♥ 3♣ 3♠ Q♠
+7♣ 6♠ 5♣ 5♦ 6♣ 4♠ 7♥ - two_pair - 7♥ 7♣ 6♣ 6♠ 5♦
+
+# three_of_a_kind
+3♣ K♣ 6♦ 5♦ 6♣ 6♥ 8♠ - three_of_a_kind - 6♦ 6♣ 6♥ K♣ 8♠
+A♦ 6♣ 6♠ 7♦ T♥ 6♥ 2♥ - three_of_a_kind - 6♥ 6♠ 6♣ A♦ T♥
+5♠ 7♣ 8♠ 7♦ 2♣ K♠ 7♠ - three_of_a_kind - 7♦ 7♠ 7♣ K♠ 8♠
+7♦ 6♣ 8♦ 8♥ 5♣ J♥ 8♠ - three_of_a_kind - 8♦ 8♥ 8♠ J♥ 7♦
+8♥ J♥ T♣ 3♠ 8♦ 8♣ 9♠ - three_of_a_kind - 8♦ 8♣ 8♥ J♥ T♣
+9♠ 3♥ 9♦ J♦ 5♣ 4♦ 9♥ - three_of_a_kind - 9♦ 9♥ 9♠ J♦ 5♣
+6♥ 9♥ 9♠ 2♥ Q♠ 8♠ 9♣ - three_of_a_kind - 9♣ 9♠ 9♥ Q♠ 8♠
+T♠ 3♠ A♦ 4♠ T♦ 2♦ T♥ - three_of_a_kind - T♦ T♥ T♠ A♦ 4♠
+J♦ J♠ J♣ T♥ 2♦ 3♦ Q♦ - three_of_a_kind - J♣ J♦ J♠ Q♦ T♥
+8♣ Q♦ J♣ Q♠ T♣ Q♣ 4♥ - three_of_a_kind - Q♣ Q♠ Q♦ J♣ T♣
+
+# full_house
+8♣ 2♦ 2♥ 2♣ 4♠ 4♣ 6♠ - full_house - 2♣ 2♥ 2♦ 4♣ 4♠
+3♦ A♣ 9♠ A♠ 2♣ 2♦ 2♥ - full_house - 2♦ 2♣ 2♥ A♠ A♣
+3♦ 5♣ 6♥ 3♠ 3♣ J♣ 5♠ - full_house - 3♣ 3♠ 3♦ 5♠ 5♣
+3♦ A♦ 3♣ 3♠ 4♣ Q♣ A♠ - full_house - 3♣ 3♠ 3♦ A♠ A♦
+5♣ A♦ 5♦ A♣ 9♣ 7♣ 5♥ - full_house - 5♦ 5♥ 5♣ A♣ A♦
+6♣ 6♠ 3♥ 5♥ 3♠ 6♥ K♠ - full_house - 6♥ 6♣ 6♠ 3♥ 3♠
+8♠ J♠ 6♦ 4♥ J♥ 6♥ 6♠ - full_house - 6♦ 6♥ 6♠ J♥ J♠
+Q♦ 6♥ 9♣ 7♣ Q♠ 6♦ 6♠ - full_house - 6♦ 6♠ 6♥ Q♠ Q♦
+8♥ 6♥ J♥ 6♣ 5♦ 8♦ 8♠ - full_house - 8♦ 8♠ 8♥ 6♣ 6♥
+T♠ 6♠ Q♣ 6♣ T♥ T♣ 9♦ - full_house - T♣ T♥ T♠ 6♣ 6♠
+
+# full_house with 2 sets of triplets
+6♣ 6♠ 3♥ 3♦ 3♠ 6♥ K♠ - full_house - 6♥ 6♣ 6♠ 3♦ 3♥
+J♦ Q♠ J♥ Q♣ 2♠ Q♥ J♣ - full_house - Q♣ Q♥ Q♠ J♣ J♥
+6♣ 6♠ 3♥ 3♦ 3♠ 6♥ K♠ - full_house - 6♥ 6♣ 6♠ 3♦ 3♥
+J♠ 6♦ J♦ J♣ 6♥ A♣ 6♣ - full_house - J♦ J♣ J♠ 6♣ 6♥
+Q♦ 9♥ 5♠ Q♠ Q♣ 9♣ 5♥ - full_house - Q♣ Q♠ Q♦ 9♣ 9♥
+
+# four_of_a_kind
+J♣ J♥ J♦ 3♠ 7♠ 8♠ J♠ - four_of_a_kind - J♦ J♠ J♣ J♥ 8♠
+J♥ Q♠ Q♦ Q♣ Q♥ J♠ J♣ - four_of_a_kind - Q♦ Q♣ Q♥ Q♠ J♣
+A♦ 2♦ 3♦ 2♣ 5♦ 2♥ 2♠ - four_of_a_kind - 2♣ 2♥ 2♠ 2♦ A♦
+9♣ 2♣ 2♥ 9♦ 9♥ 9♠ 2♦ - four_of_a_kind - 9♦ 9♥ 9♠ 9♣ 2♦
+
+# four_of_a_kind choosing the right kicker
+J♥ J♠ J♣ Q♠ Q♦ Q♣ Q♥ - four_of_a_kind - Q♦ Q♣ Q♥ Q♠ J♣
+Q♠ Q♦ J♥ J♦ J♣ Q♣ Q♥ - four_of_a_kind - Q♣ Q♥ Q♦ Q♠ J♦
+Q♠ Q♦ J♥ J♣ Q♣ Q♥ J♦ - four_of_a_kind - Q♣ Q♥ Q♦ Q♠ J♦
+Q♠ Q♦ J♥ J♣ Q♣ Q♥ J♦ - four_of_a_kind - Q♣ Q♥ Q♦ Q♠ J♦
+
+# straight, random tests
+K♠ 3♦ 4♥ 5♥ T♣ 2♠ A♠ - straight - 5♥ 4♥ 3♦ 2♠ A♠
+2♦ 5♣ 6♥ T♣ 4♦ Q♥ 3♦ - straight - 6♥ 5♣ 4♦ 3♦ 2♦
+3♣ J♠ 4♠ 6♦ 5♥ 2♠ Q♥ - straight - 6♦ 5♥ 4♠ 3♣ 2♠
+7♠ 3♥ J♣ 5♠ 6♥ 4♣ 2♠ - straight - 7♠ 6♥ 5♠ 4♣ 3♥
+5♦ 4♦ 3♥ 4♥ 6♠ 7♣ 7♠ - straight - 7♣ 6♠ 5♦ 4♥ 3♥
+J♦ 4♠ 6♠ 5♠ 8♦ 7♥ 7♠ - straight - 8♦ 7♥ 6♠ 5♠ 4♠
+7♦ 4♣ 8♠ 5♣ J♥ 8♥ 6♠ - straight - 8♥ 7♦ 6♠ 5♣ 4♣
+2♦ 9♦ 7♥ 6♥ 3♣ 8♠ 5♥ - straight - 9♦ 8♠ 7♥ 6♥ 5♥
+6♠ Q♦ J♥ 7♣ 9♥ 5♥ 8♠ - straight - 9♥ 8♠ 7♣ 6♠ 5♥
+T♠ 8♥ 9♠ 6♠ 7♠ Q♥ 3♣ - straight - T♠ 9♠ 8♥ 7♠ 6♠
+7♥ 6♣ 2♣ 5♣ T♥ 9♦ 8♦ - straight - T♥ 9♦ 8♦ 7♥ 6♣
+5♠ 8♦ T♥ 6♣ 9♦ 7♦ K♥ - straight - T♥ 9♦ 8♦ 7♦ 6♣
+5♦ J♦ 7♦ T♣ 8♣ 6♣ 9♠ - straight - J♦ T♣ 9♠ 8♣ 7♦
+3♦ 9♦ T♣ 8♠ Q♦ 2♣ J♣ - straight - Q♦ J♣ T♣ 9♦ 8♠
+8♦ 9♥ A♥ J♦ T♦ Q♠ 7♦ - straight - Q♠ J♦ T♦ 9♥ 8♦
+9♦ Q♦ J♣ 2♥ 6♦ K♥ T♠ - straight - K♥ Q♦ J♣ T♠ 9♦
+
+# straight, prefer cards on the table over hand cards
+A♦ 2♥ 3♦ 4♥ 5♠ K♦ A♠ - straight - 5♠ 4♥ 3♦ 2♥ A♠
+3♦ 7♣ 4♣ 7♠ 5♠ 3♠ 6♠ - straight - 7♠ 6♠ 5♠ 4♣ 3♠
+K♠ J♣ Q♦ T♥ 9♠ K♦ 8♦ - straight - K♦ Q♦ J♣ T♥ 9♠
+
+# straight, prefer DIAMONDS then CLUBS then HEARTS then SPADES
+2♣ K♥ 3♣ 4♣ 6♥ 4♦ 5♥ - straight - 6♥ 5♥ 4♦ 3♣ 2♣
+7♣ 5♣ 9♣ 8♠ 7♦ 6♦ 8♦ - straight - 9♣ 8♦ 7♦ 6♦ 5♣
+K♥ 4♥ A♠ J♠ Q♠ Q♣ T♣ - straight - A♠ K♥ Q♣ J♠ T♣
+
+# flush vs straight
+3♦ 5♦ 9♣ 2♦ A♣ 4♠ 2♠ - straight - 5♦ 4♠ 3♦ 2♦ A♣
+3♦ 5♣ 9♦ 2♣ A♦ 4♦ 2♦ - flush - A♦ 9♦ 4♦ 3♦ 2♦
+A♦ 2♦ 3♥ 4♦ 5♦ K♦ A♠ - flush - A♦ K♦ 5♦ 4♦ 2♦
+
+# flush
+9♣ 7♣ A♠ J♠ T♠ 3♠ 2♠ - flush - A♠ J♠ T♠ 3♠ 2♠
+4♠ Q♠ 7♦ A♠ 9♥ J♠ K♠ - flush - A♠ K♠ Q♠ J♠ 4♠
+T♦ 8♣ 4♥ 7♣ T♣ K♣ 4♣ - flush - K♣ T♣ 8♣ 7♣ 4♣
+Q♦ 8♣ 8♦ 2♦ 6♠ T♦ 9♦ - flush - Q♦ T♦ 9♦ 8♦ 2♦
+
+# straight_flush
+A♦ 2♦ 3♦ 4♦ 5♦ A♥ A♠ - straight_flush - 5♦ 4♦ 3♦ 2♦ A♦
+6♦ 2♦ 3♦ 4♦ 5♦ 7♠ K♦ - straight_flush - 6♦ 5♦ 4♦ 3♦ 2♦
+
+# straight_flush with all 7 cards forming one straight finding the best straight
+6♣ 7♣ 8♣ 9♣ T♣ J♣ Q♣ - straight_flush - Q♣ J♣ T♣ 9♣ 8♣
+8♣ 5♣ T♣ 6♣ 7♣ 9♣ J♣ - straight_flush - J♣ T♣ 9♣ 8♣ 7♣
+7♦ 3♦ 5♦ A♦ 2♦ 4♦ 6♦ - straight_flush - 7♦ 6♦ 5♦ 4♦ 3♦
+K♥ 8♥ Q♥ J♥ A♥ T♥ 9♥ - royal_flush - A♥ K♥ Q♥ J♥ T♥
+
+# royal_flush
+J♣ Q♣ K♣ 2♥ 2♣ A♣ T♣ - royal_flush - A♣ K♣ Q♣ J♣ T♣
+Q♣ T♣ A♣ K♣ J♣ 8♦ 2♦ - royal_flush - A♣ K♣ Q♣ J♣ T♣
+A♦ K♦ Q♦ J♦ T♦ 6♠ Q♥ - royal_flush - A♦ K♦ Q♦ J♦ T♦
+A♣ A♦ T♥ J♥ Q♥ K♥ A♥ - royal_flush - A♥ K♥ Q♥ J♥ T♥
+A♥ T♥ K♥ J♥ Q♥ K♣ 3♥ - royal_flush - A♥ K♥ Q♥ J♥ T♥
+2♥ K♥ Q♥ T♥ A♥ J♥ 8♣ - royal_flush - A♥ K♥ Q♥ J♥ T♥
+
+# flush with all 7 cards of the same suit
+4♠ Q♠ 7♠ A♠ 9♠ J♠ K♠ - flush - A♠ K♠ Q♠ J♠ 9♠
+2♣ 4♣ 6♣ 7♣ 8♣ T♣ A♣ - flush - A♣ T♣ 8♣ 7♣ 6♣
+T♣ 7♣ 2♣ A♣ 4♣ 6♣ 8♣ - flush - A♣ T♣ 8♣ 7♣ 6♣
+A♥ J♥ Q♥ 5♥ 2♥ K♥ 3♥ - flush - A♥ K♥ Q♥ J♥ 5♥

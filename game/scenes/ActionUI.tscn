@@ -1,0 +1,87 @@
+[gd_scene format=2]
+
+[node name="ActionUI" type="VBoxContainer"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -384.0
+margin_top = -104.0
+margin_right = -16.0
+margin_bottom = -16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 368.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MinRaiseButton" type="Button" parent="HBoxContainer"]
+margin_right = 36.0
+margin_bottom = 42.0
+text = "Min"
+
+[node name="RaiseSlider" type="HSlider" parent="HBoxContainer"]
+margin_left = 40.0
+margin_right = 317.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 20.0
+tick_count = 6
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AllInButton" type="Button" parent="HBoxContainer"]
+margin_left = 321.0
+margin_right = 368.0
+margin_bottom = 42.0
+text = "All-In"
+
+[node name="ButtonRow" type="HBoxContainer" parent="."]
+margin_top = 46.0
+margin_right = 368.0
+margin_bottom = 88.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FoldButton" type="Button" parent="ButtonRow"]
+margin_right = 120.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Fold"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CallButton" type="Button" parent="ButtonRow"]
+margin_left = 124.0
+margin_right = 244.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Call"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RaiseButton" type="Button" parent="ButtonRow"]
+margin_left = 248.0
+margin_right = 368.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Raise"
+__meta__ = {
+"_edit_use_anchors_": false
+}

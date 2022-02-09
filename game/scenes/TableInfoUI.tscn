@@ -1,0 +1,37 @@
+[gd_scene format=2]
+
+[node name="MarginContainer" type="MarginContainer"]
+anchor_right = 0.181
+anchor_bottom = 0.163
+margin_right = -0.344009
+margin_bottom = 0.199997
+size_flags_horizontal = 0
+size_flags_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TableInfoUI" type="VBoxContainer" parent="."]
+margin_right = 35.0
+margin_bottom = 24.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="RichTextLabel" parent="TableInfoUI"]
+size_flags_horizontal = 2
+size_flags_vertical = 0
+bbcode_text = "asAS"
+text = "asAS"
+
+[node name="Button" type="Button" parent="TableInfoUI"]
+margin_top = 4.0
+margin_right = 35.0
+margin_bottom = 24.0
+size_flags_vertical = 3
+text = "Join"
+__meta__ = {
+"_edit_use_anchors_": false
+}
