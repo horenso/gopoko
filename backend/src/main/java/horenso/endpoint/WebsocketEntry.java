@@ -2,7 +2,11 @@ package horenso.endpoint;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import horenso.model.communication.Response;
+import horenso.endpoint.request.JoinRequest;
+import horenso.endpoint.request.LoginRequest;
+import horenso.endpoint.response.ErrorResponse;
+import horenso.endpoint.response.Response;
+import horenso.exceptions.ErrorResponseException;
 import horenso.service.LobbyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -27,34 +31,42 @@ public class WebsocketEntry extends TextWebSocketHandler {
     private final Gson gson;
 
     @Override
-    public void handleTextMessage(WebSocketSession session, TextMessage message)
-            throws InterruptedException, IOException {
+    public void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
         System.out.println("in handleTextMessage()");
-        Map value;
+        String jsonString = message.getPayload();
+        Map<String, Object> map;
         try {
-            value = gson.fromJson(message.getPayload(), Map.class);
+            map = gson.fromJson(jsonString, Map.class);
         } catch (JsonSyntaxException e) {
-            websocketHelper.sendResponse(new Response("error", "error: invalid JSON"), session);
+            sendResponse(new ErrorResponse("/", "invalid JSON"), session);
             session.close();
             return;
         }
-        System.out.println("Got valid JSON:" + value.toString());
+        System.out.println("Got valid JSON:" + map.toString());
         System.out.println("Session attributes: " + session.getAttributes());
-        String command = value.getOrDefault("dest", null).toString();
+        String command = map.getOrDefault("dest", null).toString();
         if (command == null) {
-            websocketHelper.sendResponse(new Response("error", "error: field 'dest' missing"), session);
+            sendResponse(new ErrorResponse("/", "field \"dest\" is missing"), session);
             session.close();
             return;
         }
-        switch (command) {
-            case "login" -> loginEndpoint.login(session, value);
-            case "join" -> lobbyEndpoint.joinTable(session, value);
-            default -> {
-                websocketHelper.sendResponse(
-                        new Response("error", String.format("error: dest %s invalid", command)), session);
+        try {
+            Response response = switch (command) {
+                case "login" -> loginEndpoint.login(session, gson.fromJson(jsonString, LoginRequest.class));
+                case "join" -> lobbyEndpoint.joinTable(session, gson.fromJson(jsonString, JoinRequest.class));
+                default -> throw new ErrorResponseException("/", String.format("dest \"%s\" invalid", command), true);
+            };
+            sendResponse(response, session);
+        } catch (ErrorResponseException e) {
+            sendResponse(new ErrorResponse(e.getDest(), e.getError()), session);
+            if (e.isDisconnect()) {
                 session.close();
             }
         }
+    }
+
+    private void sendResponse(Response response, WebSocketSession session) throws IOException {
+        session.sendMessage(new TextMessage(gson.toJson(response)));
     }
 
     @Override

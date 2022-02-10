@@ -1,8 +1,8 @@
 package horenso.model;
 
 public class Player {
-    private String name;
-    private Card[] hand = new Card[2];
+    private final String name;
+    private final Card[] hand = new Card[2];
     private int chips;
 
     public Player(String name, int chips) {
@@ -37,6 +37,6 @@ public class Player {
 
     @Override
     public String toString() {
-        return String.format("Player [%-10s Chips: %d", name+"]", chips);
+        return String.format("Player [%-10s Chips: %d", name + "]", chips);
     }
 }

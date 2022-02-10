@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class PokerAppLauncher {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PokerAppLauncher.class, args);
+    public static void main(String[] args) {
+        SpringApplication.run(PokerAppLauncher.class, args);
 
     }
 

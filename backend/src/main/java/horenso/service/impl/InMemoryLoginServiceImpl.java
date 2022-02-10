@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class InMemoryLoginServiceImpl implements LoginService {
 
-    private Map<String, String> userTokenMap = new ConcurrentHashMap<>();
+    private final Map<String, String> userTokenMap = new ConcurrentHashMap<>();
 
     @Override
     public String register(String username, WebSocketSession session) throws UsernameTakenException {

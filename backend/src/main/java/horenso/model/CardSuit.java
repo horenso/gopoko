@@ -11,9 +11,9 @@ public enum CardSuit {
     hearts(2, '♥', 'H'),
     spades(3, '♠', 'S');
 
-    private int id;
-    private char symbol;
-    private char letter;
+    private final int id;
+    private final char symbol;
+    private final char letter;
 
     public static CardSuit fromChar(char character) {
         return switch (character) {

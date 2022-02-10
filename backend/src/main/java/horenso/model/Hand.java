@@ -10,8 +10,8 @@ import java.util.List;
 @ToString
 @Getter
 public class Hand {
-    private Type handType;
-    private List<Card> cards;
+    private final Type handType;
+    private final List<Card> cards;
 
     public enum Type {
         HIGH_CARD,

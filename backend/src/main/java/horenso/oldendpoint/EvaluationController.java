@@ -19,15 +19,14 @@ import java.util.List;
 @CrossOrigin
 public class EvaluationController {
 
-    private HandEvaluationService handEvaluationService;
+    private final HandEvaluationService handEvaluationService;
+    private final CardMapper cardMapper;
 
     @Autowired
     public EvaluationController(HandEvaluationService handEvaluationService, CardMapper cardMapper) {
         this.handEvaluationService = handEvaluationService;
         this.cardMapper = cardMapper;
     }
-
-    private CardMapper cardMapper;
 
     @PostMapping(path = "/eval")
     public String rateHand(@RequestBody List<CardDto> cardDtoList) {

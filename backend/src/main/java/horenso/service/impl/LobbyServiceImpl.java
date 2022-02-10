@@ -1,8 +1,8 @@
 package horenso.service.impl;
 
 import com.google.gson.Gson;
+import horenso.endpoint.response.LobbyUpdateResponse;
 import horenso.model.Table;
-import horenso.model.communication.LobbyUpdateResponse;
 import horenso.service.LobbyService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.TextMessage;

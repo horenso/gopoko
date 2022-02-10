@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Deck {
-    private LinkedList<Card> deck;
+    private final LinkedList<Card> deck;
 
     public Deck() {
         this.deck = new LinkedList<>();

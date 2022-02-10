@@ -20,8 +20,8 @@ public enum CardValue {
     king(13, 'K'),
     ace(14, 'A');
 
-    private int numericValue;
-    private char character;
+    private final int numericValue;
+    private final char character;
 
     public static CardValue fromChar(char text) {
         return switch (text) {
