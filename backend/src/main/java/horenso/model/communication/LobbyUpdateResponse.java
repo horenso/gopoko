@@ -8,15 +8,15 @@ public class LobbyUpdateResponse extends Response {
     private List<Table> tables;
 
     public LobbyUpdateResponse(List<Table> tables) {
-        super("tableUpdate", "success");
+        super("table_update", "success");
         this.tables = tables;
     }
 
-    public LobbyUpdateResponse(String destination, String result) {
-        super(destination, result);
+    public LobbyUpdateResponse(String dest, String result) {
+        super(dest, result);
     }
 
-    public LobbyUpdateResponse(String destination, String result, String token) {
-        super(destination, result, token);
+    public LobbyUpdateResponse(String dest, String result, String token) {
+        super(dest, result, token);
     }
 }

@@ -1,10 +1,10 @@
 package horenso.oldendpoint.generators;
 
-import horenso.model.Deck;
 import horenso.model.Card;
-import horenso.model.HandRanking;
-import horenso.service.HandRankerService;
-import horenso.service.impl.HandRankerServiceImpl;
+import horenso.model.Deck;
+import horenso.model.Hand;
+import horenso.service.HandEvaluationService;
+import horenso.service.impl.HandEvaluationServiceImpl;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -17,7 +17,7 @@ public class CreateRandomEvaluationFile {
 
     static final int TESTS = 1_000_000; // takes about 4 seconds on a modern laptop
     static final Path PATH = Path.of("src/test/resources/randomEvaluations.txt");
-    static final HandRankerService handRankerService = new HandRankerServiceImpl(); // TODO: Dep injection
+    static final HandEvaluationService HAND_EVALUATION_SERVICE = new HandEvaluationServiceImpl(); // TODO: Dep injection
 
     public static void main(String[] args) {
         try {
@@ -52,7 +52,7 @@ public class CreateRandomEvaluationFile {
             for (int j = 0; j < 7; j++) {
                 cards.add(deck.drawCard());
             }
-            HandRanking ranking = handRankerService.rateHand(cards);
+            Hand ranking = HAND_EVALUATION_SERVICE.rateHand(cards);
 
             cards.forEach(card -> cardStringBuilder.append(card.toString()).append(" "));
             cardStringBuilder

@@ -1,5 +1,7 @@
 package horenso.service;
 
+import horenso.exceptions.FullTableException;
+import horenso.exceptions.InvalidTableIdException;
 import horenso.model.Table;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -11,6 +13,8 @@ public interface LobbyService {
     public List<WebSocketSession> sessionList = new ArrayList<>();
 
     void addTable(Table table);
-    void joinTable(String tableName, String userName);
+
+    void joinTable(int tableId, String userName) throws InvalidTableIdException, FullTableException;
+
     void addSession(WebSocketSession session);
 }

@@ -4,6 +4,7 @@ import horenso.exceptions.UnknownUserException;
 import horenso.exceptions.UsernameTakenException;
 import horenso.service.LoginService;
 import org.springframework.stereotype.Service;
+import org.springframework.web.socket.WebSocketSession;
 
 import java.util.Map;
 import java.util.UUID;
@@ -15,7 +16,8 @@ public class InMemoryLoginServiceImpl implements LoginService {
     private Map<String, String> userTokenMap = new ConcurrentHashMap<>();
 
     @Override
-    public String register(String username) throws UsernameTakenException {
+    public String register(String username, WebSocketSession session) throws UsernameTakenException {
+        session.getAttributes().put("username", username);
         String token = UUID.randomUUID().toString();
         if (userTokenMap.putIfAbsent(username, token) != null) {
             throw new UsernameTakenException();

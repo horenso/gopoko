@@ -18,10 +18,9 @@ public class LobbyServiceImpl implements LobbyService {
 
     public LobbyServiceImpl(Gson gson) {
         this.gson = gson;
-
-        tableList.add(Table.builder().name("Table 1").description("bla").playerMax(5).build());
-        tableList.add(Table.builder().name("Table 2").description("bli").playerMax(6).build());
-        tableList.add(Table.builder().name("Table 3").description("blu").playerMax(10).build());
+        tableList.add(Table.builder().id(0).name("Table 1").description("bla").playerMax(5).build());
+        tableList.add(Table.builder().id(1).name("Table 2").description("bli").playerMax(6).build());
+        tableList.add(Table.builder().id(2).name("Table 3").description("blu").playerMax(10).build());
     }
 
     @Override
@@ -35,8 +34,13 @@ public class LobbyServiceImpl implements LobbyService {
     }
 
     @Override
-    public void joinTable(String tableName, String userName) {
-        // TODO
+    public void joinTable(int tableId, String userName) {
+        synchronized (this) {
+            Optional<Table> optionalTable = tableList.stream().filter(t -> t.getId() == tableId).findFirst();
+            if (optionalTable.isEmpty()) {
+
+            }
+        }
     }
 
     @Override

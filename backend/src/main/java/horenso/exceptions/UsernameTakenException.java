@@ -1,3 +1,4 @@
 package horenso.exceptions;
 
-public class UsernameTakenException extends Exception { }
+public class UsernameTakenException extends Exception {
+}

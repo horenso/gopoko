@@ -9,6 +9,6 @@ public class PokerAppLauncher {
 	public static void main(String[] args) {
 		SpringApplication.run(PokerAppLauncher.class, args);
 
-	}
+    }
 
 }

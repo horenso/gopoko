@@ -1,9 +1,9 @@
 package horenso.oldendpoint.mapper;
 
-import horenso.oldendpoint.dto.CardDto;
 import horenso.model.Card;
 import horenso.model.CardSuit;
 import horenso.model.CardValue;
+import horenso.oldendpoint.dto.CardDto;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

@@ -163,7 +163,7 @@ A♦ 2♥ 3♦ 4♥ 5♠ K♦ A♠ - straight - 5♠ 4♥ 3♦ 2♥ A♠
 3♦ 7♣ 4♣ 7♠ 5♠ 3♠ 6♠ - straight - 7♠ 6♠ 5♠ 4♣ 3♠
 K♠ J♣ Q♦ T♥ 9♠ K♦ 8♦ - straight - K♦ Q♦ J♣ T♥ 9♠
 
-# straight, prefer DIAMONDS then CLUBS then HEARTS then SPADES
+# straight, prefer order: diamonds, clubs, hearts, spades
 2♣ K♥ 3♣ 4♣ 6♥ 4♦ 5♥ - straight - 6♥ 5♥ 4♦ 3♣ 2♣
 7♣ 5♣ 9♣ 8♠ 7♦ 6♦ 8♦ - straight - 9♣ 8♦ 7♦ 6♦ 5♣
 K♥ 4♥ A♠ J♠ Q♠ Q♣ T♣ - straight - A♠ K♥ Q♣ J♠ T♣

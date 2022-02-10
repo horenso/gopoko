@@ -2,37 +2,36 @@ package horenso.service.impl;
 
 import horenso.model.Card;
 import horenso.model.CardValue;
-import horenso.model.HandRanking;
-import horenso.model.HandType;
+import horenso.model.Hand;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class HandRanker {
-    private List<Card> givenCards;
+class HandEvaluator {
+    private final List<Card> givenCards;
 
-    private Card[][] cardTable = new Card[14][4];
-    private int[] valueHistogram = new int[14];
+    private final Card[][] cardTable = new Card[14][4];
+    private final int[] valueHistogram = new int[14];
 
-    private HandRanking bestHandFound;
+    private Hand bestHandFound;
 
-    public HandRanker(List<Card> givenCards) {
+    public HandEvaluator(List<Card> givenCards) {
         this.givenCards = givenCards;
     }
 
-    public HandRanking rateHand() {
+    public Hand rateHand() {
         fillCardTable();
         checkFlushAndStraightFlush();
         if (bestHandFound == null) {
             checkStraight();
-        } else if (bestHandFound.getHandType().ordinal() >= HandType.STRAIGHT_FLUSH.ordinal()) {
+        } else if (bestHandFound.getHandType().ordinal() >= Hand.Type.STRAIGHT_FLUSH.ordinal()) {
             return bestHandFound;
         }
         analyseSets();
         if (bestHandFound == null) {
             List<Card> cards = new ArrayList<>();
             addKickers(cards);
-            bestHandFound = new HandRanking(HandType.HIGH_CARD, cards);
+            bestHandFound = new Hand(Hand.Type.HIGH_CARD, cards);
         }
         return bestHandFound;
     }
@@ -73,13 +72,13 @@ class HandRanker {
                     for (int j = i + 4; j >= i; j--) {
                         cards.add(cardTable[j][suitValue]);
                     }
-                    HandType handType;
+                    Hand.Type handType;
                     if (cards.get(0).getValue() == CardValue.ace) {
-                        handType = HandType.ROYAL_FLUSH;
+                        handType = Hand.Type.ROYAL_FLUSH;
                     } else {
-                        handType = HandType.STRAIGHT_FLUSH;
+                        handType = Hand.Type.STRAIGHT_FLUSH;
                     }
-                    bestHandFound = new HandRanking(handType, cards);
+                    bestHandFound = new Hand(handType, cards);
                     return;
                 }
                 if (flushStreak == 5 && i != 0) { // i != 0 because A is in two places
@@ -94,7 +93,7 @@ class HandRanker {
                         }
                     }
 
-                    bestHandFound = new HandRanking(HandType.FLUSH, cards);
+                    bestHandFound = new Hand(Hand.Type.FLUSH, cards);
                 }
             }
         }
@@ -140,7 +139,7 @@ class HandRanker {
                         removeFromCardTable(nextCard);
                     }
                 }
-                bestHandFound = new HandRanking(HandType.STRAIGHT, cards);
+                bestHandFound = new Hand(Hand.Type.STRAIGHT, cards);
                 return;
             }
         }
@@ -180,35 +179,35 @@ class HandRanker {
             List<Card> cards = new ArrayList<>(5);
             addCardsWithValueIndex(cards, quadruple);
             addKickers(cards);
-            bestHandFound = new HandRanking(HandType.FOUR_OF_A_KIND, cards);
+            bestHandFound = new Hand(Hand.Type.FOUR_OF_A_KIND, cards);
         } else if (bestTriple != null) {
-            HandType handType;
+            Hand.Type handType;
             List<Card> cards = new ArrayList<>(5);
             if (bestPair != null) {
-                handType = HandType.FULL_HOUSE;
+                handType = Hand.Type.FULL_HOUSE;
                 addCardsWithValueIndex(cards, bestTriple);
                 addCardsWithValueIndex(cards, bestPair);
             } else if (bestHandFound == null) {
-                handType = HandType.THREE_OF_A_KIND;
+                handType = Hand.Type.THREE_OF_A_KIND;
                 addCardsWithValueIndex(cards, bestTriple);
                 addKickers(cards);
             } else {
                 return;
             }
-            bestHandFound = new HandRanking(handType, cards);
+            bestHandFound = new Hand(handType, cards);
         } else if (bestPair != null && bestHandFound == null) {
-            HandType handType;
+            Hand.Type handType;
             List<Card> cards = new ArrayList<>(5);
             if (secondPair == null) {
-                handType = HandType.PAIR;
+                handType = Hand.Type.PAIR;
                 addCardsWithValueIndex(cards, bestPair);
             } else {
-                handType = HandType.TWO_PAIR;
+                handType = Hand.Type.TWO_PAIR;
                 addCardsWithValueIndex(cards, bestPair);
                 addCardsWithValueIndex(cards, secondPair);
             }
             addKickers(cards);
-            bestHandFound = new HandRanking(handType, cards);
+            bestHandFound = new Hand(handType, cards);
         }
     }
 

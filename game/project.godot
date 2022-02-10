@@ -16,4 +16,8 @@ _global_script_class_icons={
 [application]
 
 config/name="PokerClient"
-run/main_scene="res://scenes/Lobby.tscn"
+run/main_scene="res://scenes/lobby.tscn"
+
+[autoload]
+
+WebsocketHandler="*res://scripts/websocket_handler.gd"
