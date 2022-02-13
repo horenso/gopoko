@@ -3,7 +3,8 @@ extends Node
 const URL = "ws://localhost:8080/"
 
 var _client = WebSocketClient.new()
-var _is_connected: bool = false
+var is_connected: bool = false
+var is_logged_in: bool = false
 var _token = null
 
 # Signals nodes can subscribe to, each signal corresponse to a path
@@ -13,14 +14,16 @@ var _token = null
 signal login(payload)
 # warning-ignore:unused_signal
 signal table_update(payload)
+# warning-ignore:unused_signal
+signal table_open(payload)
 
 
 func send_request(request: Dictionary):
 	var payload = JSON.print(request)
 	print("Sending payload: ", payload)
-	if _is_connected:
+	if is_connected:
 		_client.get_peer(1).put_packet(payload.to_utf8())
-	# TODO: What happens when we aren't connected?
+	# TODO: What happens when we aren"t connected?
 	# Maybe save requests in a queue? Or forget about them?
 
 
@@ -32,14 +35,14 @@ func _ready():
 
 	var err = _client.connect_to_url(URL)
 	if err == OK:
-		_is_connected = true
+		is_connected = true
 	else:
 		print("Unable to connect to server")
 		# TODO: Try to reconnect
 
 
 func _process(_delta):
-	if _is_connected:
+	if is_connected:
 		_client.poll()
 
 

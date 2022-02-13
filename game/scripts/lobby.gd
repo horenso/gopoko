@@ -4,49 +4,36 @@ enum State { WAITING_FOR_SERVER, NOT_LOGGED_IN, LOGGED_IN }
 
 
 func _ready():
-	$TableList.visible = false
-
-
-func _login_request(username):
-	var login_request = {"dest": "login", "username": username}
-	$"/root/WebsocketHandler".connect("login", self, "_on_login_response", [], CONNECT_ONESHOT)
-	$"/root/WebsocketHandler".send_request(login_request)
-
-
-func _on_login_response(payload: Dictionary):
-	if payload["success"]:
-		$LoginOverlay/LoginSection/ErrorLabel.text = ""
-		$LoginOverlay.visible = false
-		$TableList.visible = true
-	else:
-		$LoginOverlay/LoginSection/ErrorLabel.text = payload["error"]
+	var sub_rquest = {"action": "subscribe", "dest": "lobby"}
+	$"/root/WebsocketHandler".connect("table_update", self, "_on_table_update")
+	$"/root/WebsocketHandler".send_request(sub_rquest)
 
 
 func _on_table_update(payload: Dictionary):
-	$TableList.update_tables(payload["tables"])
+	$TableList.update_tables(payload)
 
-
-func _join_table(table_id: int):
-	var join_request = {"dest": "join", "id": table_id}
-	$"/root/WebsocketHandler".connect("join", self, "_on_join_response", [], CONNECT_ONESHOT)
-	$"/root/WebsocketHandler".send_request(join_request)
-
-
-func _on_UsernameField_text_entered(new_text):
-	self._login_request(new_text)
-
-
-func _on_Button_pressed():
-	var username = $LoginOverlay/LoginSection/UsernameField.text
-	self._login_request(username)
-	
-	
-func _on_join_response(payload: Dictionary):
-	print("Response to join: ", payload)
-	if payload['success']:
-		get_tree().change_scene("res://scenes/table.tscn")
 
 func _on_TableList_item_activated():
-	var table_name = $TableList.get_selected().get_text(0)
+	var selected = $TableList.get_selected()
+	var table_id = selected.get_text(0)
+	var table_name = selected.get_text(1)
 	print("Joining ", table_name)
-	self._join_table(table_name.to_int())
+	self._open_table(table_id.to_int(), table_name)
+
+
+# Requests and responses:
+
+
+func _open_table(table_id: int, table_name: String):
+	var table_str = "table_%d" % [table_id]
+	var sub_rquest = {"action": "subscribe", "dest": table_str}
+	var table_scene = load("res://scenes/table.tscn").instance()
+	table_scene.table_id = table_id
+	$"/root/WebsocketHandler".connect(table_str, self, "_on_opened_table", [], CONNECT_ONESHOT)
+	$"/root/WebsocketHandler".send_request(sub_rquest)
+
+
+func _on_opened_table(payload: Dictionary):
+	print("Response to join: ", payload)
+	if payload["success"]:
+		get_tree().change_scene("res://scenes/table.tscn")

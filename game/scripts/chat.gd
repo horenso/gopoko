@@ -10,9 +10,6 @@ func _on_MessageInput_gui_input(event):
 	pass
 
 
-#	print(event)
-
-
 func send_message(message: String):
 	if message.empty():
 		return

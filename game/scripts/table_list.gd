@@ -26,7 +26,7 @@ func add_table(name: String, description: String, player_max: int, id: int):
 	new_child.set_text(3, "(0|%d)" % [player_max])
 
 
-func _update_tables(payload: Dictionary):
+func update_tables(payload: Dictionary):
 	# The lobby will be reworked anyway
 	# but it would be nice to update the Tree Node instread of just
 	# replacing all entries

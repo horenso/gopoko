@@ -1,19 +1,34 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/ui_action.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/ui_chat.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/card.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/table.gd" type="Script" id=4]
 
-[node name="TableUI" type="Control"]
+[node name="Table" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 3.17838
 margin_bottom = 3.17834
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_right = 289.0
+margin_bottom = 20.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ChatUI" parent="." instance=ExtResource( 2 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 25.0
+margin_top = -207.0
+margin_right = 253.0
+margin_bottom = -30.0
 
 [node name="ActionUI" parent="." instance=ExtResource( 1 )]
 
@@ -21,3 +36,14 @@ __meta__ = {
 
 [node name="Card" parent="." instance=ExtResource( 3 )]
 position = Vector2( 535.271, 212.24 )
+
+[node name="LeaveButton" type="Button" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -87.0
+margin_bottom = 20.0
+text = "Leave Table"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="LeaveButton" to="." method="_on_LeaveButton_pressed"]
