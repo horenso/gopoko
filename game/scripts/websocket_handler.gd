@@ -18,15 +18,6 @@ signal table_list_update(payload)
 signal table_open(payload)
 
 
-func send_request(request: Dictionary):
-	var payload = JSON.print(request)
-	print("Sending payload: ", payload)
-	if is_connected:
-		_client.get_peer(1).put_packet(payload.to_utf8())
-	# TODO: What happens when we aren"t connected?
-	# Maybe save requests in a queue? Or forget about them?
-
-
 func _ready():
 	_client.connect("connection_closed", self, "_closed")
 	_client.connect("connection_error", self, "_closed_with_error")
@@ -39,6 +30,15 @@ func _ready():
 	else:
 		print("Unable to connect to server")
 		# TODO: Try to reconnect
+
+
+func send_request(request: Dictionary):
+	var payload = JSON.print(request)
+	print("Sending payload: ", payload)
+	if is_connected:
+		_client.get_peer(1).put_packet(payload.to_utf8())
+	# TODO: What happens when we aren"t connected?
+	# Maybe save requests in a queue? Or forget about them?
 
 
 func _process(_delta):

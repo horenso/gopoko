@@ -1,7 +1,9 @@
 extends Panel
 
+
 func _ready():
 	$Rows/UsernameField.grab_focus()
+
 
 func _on_UsernameField_text_entered(new_text):
 	self._login_request(new_text)

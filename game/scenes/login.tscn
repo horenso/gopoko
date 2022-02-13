@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://scenes/login.gd" type="Script" id=1]
+[ext_resource path="res://scripts/login.gd" type="Script" id=1]
 
 [sub_resource type="Theme" id=1]
 Panel/colors/ = Color( 0.396078, 0.0705882, 0.0705882, 1 )
@@ -10,10 +10,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -211.7
-margin_top = -105.603
-margin_right = 157.3
-margin_bottom = 161.897
+margin_left = -184.5
+margin_top = -133.75
+margin_right = 184.5
+margin_bottom = 133.75
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false

@@ -12,10 +12,14 @@ __meta__ = {
 }
 
 [node name="TableList" type="Tree" parent="."]
-margin_left = 49.4442
-margin_top = 17.9797
-margin_right = 974.444
-margin_bottom = 574.98
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -414.5
+margin_top = -259.0
+margin_right = 414.5
+margin_bottom = 259.0
 columns = 4
 hide_root = true
 select_mode = 1
