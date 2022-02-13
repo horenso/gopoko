@@ -21,12 +21,12 @@ public class LobbyEndpoint {
                 throw new ErrorResponseException("join", "session must contain a username header", true);
             }
             lobbyService.joinTable(joinRequest.getId(), (String) session.getAttributes().get("username"));
+            return new JoinResponse();
         } catch (InvalidTableIdException e) {
             throw new ErrorResponseException(
                     "join", String.format("table with id %d doesn't exist", joinRequest.getId()), false);
         } catch (FullTableException e) {
             throw new ErrorResponseException("join", "table is already full", false);
         }
-        return new JoinResponse();
     }
 }

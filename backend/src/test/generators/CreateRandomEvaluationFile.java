@@ -1,5 +1,3 @@
-package horenso.oldendpoint.generators;
-
 import horenso.model.Card;
 import horenso.model.Deck;
 import horenso.model.Hand;

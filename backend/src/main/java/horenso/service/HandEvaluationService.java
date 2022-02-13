@@ -17,7 +17,7 @@ public interface HandEvaluationService {
     Hand rateHand(List<Card> cardList);
 
     /**
-     * Given a list a hands, return the strongest hand. In a case of a draw, returns the set of winners.
+     * Given a list of hands, return the strongest set of hands. In a case of a draw, returns the set of winners.
      *
      * @param hands a list of hands
      * @return the strongest hand, considering first the hand type and then the hand cards

@@ -11,7 +11,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
-public class InMemoryLoginServiceImpl implements LoginService {
+public class LoginServiceImpl implements LoginService {
 
     private final Map<String, String> userTokenMap = new ConcurrentHashMap<>();
 

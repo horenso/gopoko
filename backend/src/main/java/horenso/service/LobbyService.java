@@ -10,11 +10,10 @@ import java.util.List;
 
 public interface LobbyService {
     List<Table> tableList = new ArrayList<>();
-    List<WebSocketSession> sessionList = new ArrayList<>();
+
+    void subscribeToTableUpdates(WebSocketSession session);
 
     void addTable(Table table);
 
     void joinTable(int tableId, String userName) throws InvalidTableIdException, FullTableException;
-
-    void addSession(WebSocketSession session);
 }

@@ -1,6 +1,6 @@
 package horenso.config;
 
-import horenso.endpoint.WebsocketEntry;
+import horenso.endpoint.WebsocketEntrance;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
@@ -11,9 +11,9 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @EnableWebSocket
 @AllArgsConstructor
 public class WebSocketConfig implements WebSocketConfigurer {
-    private final WebsocketEntry websocketEntry;
+    private final WebsocketEntrance websocketEntrance;
 
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(websocketEntry, "/").setAllowedOrigins("*"); // TODO: * as origin is not secure
+        registry.addHandler(websocketEntrance, "/").setAllowedOrigins("*");
     }
 }

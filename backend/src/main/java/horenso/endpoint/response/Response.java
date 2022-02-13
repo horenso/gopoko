@@ -9,5 +9,5 @@ import lombok.Setter;
 @Setter
 public abstract class Response {
     private final String dest;
-    private final Boolean success;
+    private final boolean success;
 }
