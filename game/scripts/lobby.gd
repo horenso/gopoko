@@ -9,6 +9,11 @@ func _ready():
 	$"/root/WebsocketHandler".send_request(sub_rquest)
 
 
+func _exit_tree():
+	var unsub_rquest = {"action": "unsubscribe", "dest": "table_list_updates"}
+	$"/root/WebsocketHandler".send_request(unsub_rquest)
+
+
 func _on_table_list_update(payload: Dictionary):
 	$TableList.update_tables(payload)
 
@@ -34,3 +39,4 @@ func _open_table(table_id: int, table_name: String):
 	root.add_child(table_instance)
 	get_tree().set_current_scene(table_instance)
 	lobby.queue_free()
+
