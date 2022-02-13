@@ -22,12 +22,12 @@ public class LobbyServiceImpl implements LobbyService {
         addTable(Table.builder().id(0).name("Table 1").description("bla").playerMax(5).build());
         addTable(Table.builder().id(1).name("Table 2").description("bli").playerMax(6).build());
         addTable(Table.builder().id(2).name("Table 3").description("blu").playerMax(10).build());
-        websocketService.createRoom("lobby");
+        websocketService.createRoom("table_list_updates");
     }
 
     @Override
     public void subscribeToTableUpdates(WebSocketSession session) {
-        websocketService.subscribe(session, "lobby");
+        websocketService.subscribe(session, "table_list_updates");
         websocketService.sendToOneSession(session, new LobbyUpdateResponse(tableList));
     }
 

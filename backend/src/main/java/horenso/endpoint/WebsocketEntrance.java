@@ -57,9 +57,10 @@ public class WebsocketEntrance extends TextWebSocketHandler {
             switch (action) {
                 case "subscribe" -> {
                     websocketService.subscribe(session, dest);
-                    if (dest.equals("lobby")) {
+                    if (dest.equals("table_list_updates")) {
                         lobbyService.subscribeToTableUpdates(session);
-                    } else if (dest.startsWith("table_")) {
+                    } else if (dest.matches("table_(%d)+")) {
+                        // TODO:
                     }
                 }
                 case "unsubscribe" -> websocketService.unsubscribe(session, dest);

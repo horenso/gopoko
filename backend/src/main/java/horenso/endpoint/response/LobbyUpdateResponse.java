@@ -12,7 +12,7 @@ public class LobbyUpdateResponse extends Response {
     private List<Table> tables;
 
     public LobbyUpdateResponse(List<Table> tables) {
-        super("table_update", true);
+        super("table_list_update", true);
         this.tables = tables;
     }
 }

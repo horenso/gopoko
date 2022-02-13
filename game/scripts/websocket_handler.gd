@@ -13,7 +13,7 @@ var _token = null
 # warning-ignore:unused_signal
 signal login(payload)
 # warning-ignore:unused_signal
-signal table_update(payload)
+signal table_list_update(payload)
 # warning-ignore:unused_signal
 signal table_open(payload)
 
