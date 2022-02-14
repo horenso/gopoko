@@ -19,9 +19,9 @@ public class LobbyServiceImpl implements LobbyService {
     public LobbyServiceImpl(Gson gson, WebsocketService websocketService) {
         this.gson = gson;
         this.websocketService = websocketService;
-        addTable(Table.builder().id(0).name("Table 1").description("bla").playerMax(5).build());
-        addTable(Table.builder().id(1).name("Table 2").description("bli").playerMax(6).build());
-        addTable(Table.builder().id(2).name("Table 3").description("blu").playerMax(10).build());
+        addTable(Table.builder().id(0).name("HoldemTable 1").description("bla").playerMax(5).build());
+        addTable(Table.builder().id(1).name("HoldemTable 2").description("bli").playerMax(6).build());
+        addTable(Table.builder().id(2).name("HoldemTable 3").description("blu").playerMax(10).build());
         websocketService.createRoom("table_list_updates");
     }
 
@@ -35,7 +35,7 @@ public class LobbyServiceImpl implements LobbyService {
     public void addTable(Table table) {
         Optional<Table> tableWithSameName = tableList.stream().filter(t -> t.getName() == table.getName()).findFirst();
         if (tableWithSameName.isPresent()) {
-            System.out.println(String.format("Table with name %s already existed", table.getName()));
+            System.out.println(String.format("HoldemTable with name %s already existed", table.getName()));
             return;
         }
         websocketService.createRoom(String.format("table_%d", table.getId()));

@@ -213,7 +213,7 @@ class HandEvaluator {
 
     /**
      * Add kickers from the table
-     * Table cards are preferred over hand cards (index 0 and 1)
+     * HoldemTable cards are preferred over hand cards (index 0 and 1)
      *
      * @param cards list of cards to add kickers until the list contains exactly five cards
      */
