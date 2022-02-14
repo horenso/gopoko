@@ -6,24 +6,17 @@ import horenso.exceptions.InvalidTableIdException;
 import horenso.model.Table;
 import horenso.service.LobbyService;
 import horenso.service.WebsocketService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.util.Optional;
 
+@AllArgsConstructor
 @Service
 public class LobbyServiceImpl implements LobbyService {
     private final Gson gson;
     private final WebsocketService websocketService;
-
-    public LobbyServiceImpl(Gson gson, WebsocketService websocketService) {
-        this.gson = gson;
-        this.websocketService = websocketService;
-        addTable(Table.builder().id(0).name("HoldemTable 1").description("bla").playerMax(5).build());
-        addTable(Table.builder().id(1).name("HoldemTable 2").description("bli").playerMax(6).build());
-        addTable(Table.builder().id(2).name("HoldemTable 3").description("blu").playerMax(10).build());
-        websocketService.createRoom("table_list_updates");
-    }
 
     @Override
     public void subscribeToTableUpdates(WebSocketSession session) {

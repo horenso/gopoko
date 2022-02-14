@@ -33,3 +33,6 @@ build/
 
 ### Generated files ###
 /src/test/resources/randomEvaluations.txt
+
+### Database ###
+**/*.db

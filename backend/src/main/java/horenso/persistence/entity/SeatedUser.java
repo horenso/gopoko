@@ -2,24 +2,24 @@ package horenso.persistence.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
 @Data
+@Entity
 public class SeatedUser implements Serializable {
-    @Id
+    @EmbeddedId
+    private SeatedUserKey id;
+
     @ManyToOne
+    @MapsId("holdemTableId")
+    @JoinColumn(name = "holdem_table_id")
+    private HoldemTable holdemTable;
+
+    @ManyToOne
+    @MapsId("userId")
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "table_id")
-    private HoldemTable holdemTable;
-
-    private Short seat;
+    private Short seatNumber;
 }

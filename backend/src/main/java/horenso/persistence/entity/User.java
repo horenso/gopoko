@@ -3,20 +3,14 @@ package horenso.persistence.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
-/**
- * Schema
- * User: [id, name, token]
- * HoldemTable: [id, name]
- * Seated User: [user_id, table_id, seat_number]
- */
-
-@Entity
 @Data
-public class User {
+@Entity
+public class User implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
+    @GeneratedValue
     private Long id;
 
     @Column(nullable = false)
@@ -24,4 +18,7 @@ public class User {
 
     @Column(nullable = false)
     private String token;
+
+    @OneToMany(mappedBy = "user")
+    private Set<SeatedUser> observingTables;
 }
