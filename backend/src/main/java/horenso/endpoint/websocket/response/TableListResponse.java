@@ -1,4 +1,4 @@
-package horenso.endpoint.response;
+package horenso.endpoint.websocket.response;
 
 import horenso.model.Table;
 import lombok.Getter;
@@ -8,11 +8,11 @@ import java.util.List;
 
 @Getter
 @Setter
-public class LobbyUpdateResponse extends Response {
+public class TableListResponse extends Response {
     private List<Table> tables;
 
-    public LobbyUpdateResponse(List<Table> tables) {
-        super("table_list_update", true);
+    public TableListResponse(List<Table> tables) {
+        super("table_list", true);
         this.tables = tables;
     }
 }

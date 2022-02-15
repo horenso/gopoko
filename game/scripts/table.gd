@@ -8,7 +8,7 @@ var table_name = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Label.text = '%s (%s)' % [table_name, table_id_str]
+	$Label.text = "%s (%s)" % [table_name, table_id_str]
 	var sub_rquest = {"action": "subscribe", "dest": table_id_str}
 #	$"/root/WebsocketHandler".connect(_table_id_str, self, "_on_opened_table", [], CONNECT_ONESHOT)
 	$"/root/WebsocketHandler".send_request(sub_rquest)
@@ -17,8 +17,7 @@ func _ready():
 func _exit_tree():
 	var unsub_rquest = {"action": "unsubscribe", "dest": table_id_str}
 	$"/root/WebsocketHandler".send_request(unsub_rquest)
-	
-	
+
+
 func _on_LeaveButton_pressed():
 	get_tree().change_scene_to(load("res://scenes/lobby.tscn"))
-

@@ -1,4 +1,4 @@
-package horenso.endpoint.response;
+package horenso.endpoint.websocket.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -11,7 +11,7 @@ func _ready():
 	set_column_title(1, "Table Name")
 	set_column_title(2, "Description")
 	set_column_title(3, "Players")
-	$"/root/WebsocketHandler".connect("table_list_update", self, "_update_tables")
+	$"/root/WebsocketHandler".connect("table_list", self, "_update_tables")
 
 
 func add_table(name: String, description: String, player_max: int, id: int):

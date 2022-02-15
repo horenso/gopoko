@@ -1,4 +1,4 @@
-package horenso.endpoint.response;
+package horenso.endpoint.websocket.response;
 
 public class LoginResponse extends Response {
     private final String token;

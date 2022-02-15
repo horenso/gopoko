@@ -1,21 +1,13 @@
 package horenso.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@Getter
-@Setter
-@EqualsAndHashCode
+@AllArgsConstructor
+@Data
 @Builder()
 public class Table {
-    List<Player> players = new ArrayList<>();
-    private int id;
+    private Long id;
     private String name;
-    private String description;
-    private int playerMax;
 }

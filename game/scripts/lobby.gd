@@ -1,21 +1,24 @@
 extends Control
 
+onready var websocket_handler = $"/root/WebsocketHandler"
+onready var table_list = $"TableList"
+
 const Table = preload("res://scenes/table.tscn")
 
 
 func _ready():
-	var sub_rquest = {"action": "subscribe", "dest": "table_list_updates"}
-	$"/root/WebsocketHandler".connect("table_list_update", self, "_on_table_list_update")
-	$"/root/WebsocketHandler".send_request(sub_rquest)
+	var sub_rquest = {"action": "send", "dest": "table_list"}
+	websocket_handler.send_request(sub_rquest, self, "_on_table_list_update", true)
 
 
 func _exit_tree():
-	var unsub_rquest = {"action": "unsubscribe", "dest": "table_list_updates"}
-	$"/root/WebsocketHandler".send_request(unsub_rquest)
+#	var unsub_rquest = {"action": "unsubscribe", "dest": "table_list"}
+#	websocket_handler.send_request(unsub_rquest)
+	pass
 
 
 func _on_table_list_update(payload: Dictionary):
-	$TableList.update_tables(payload)
+	table_list.update_tables(payload)
 
 
 func _on_TableList_item_activated():
@@ -39,4 +42,3 @@ func _open_table(table_id: int, table_name: String):
 	root.add_child(table_instance)
 	get_tree().set_current_scene(table_instance)
 	lobby.queue_free()
-

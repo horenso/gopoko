@@ -1,4 +1,4 @@
-package horenso.endpoint.response;
+package horenso.endpoint.websocket.response;
 
 public class JoinResponse extends Response {
     public JoinResponse() {

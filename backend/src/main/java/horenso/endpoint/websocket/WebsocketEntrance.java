@@ -1,13 +1,11 @@
-package horenso.endpoint;
+package horenso.endpoint.websocket;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import horenso.endpoint.request.JoinRequest;
-import horenso.endpoint.request.LoginRequest;
-import horenso.endpoint.response.ErrorResponse;
-import horenso.endpoint.response.Response;
+import horenso.endpoint.websocket.request.JoinRequest;
+import horenso.endpoint.websocket.response.ErrorResponse;
+import horenso.endpoint.websocket.response.Response;
 import horenso.exceptions.ErrorResponseException;
-import horenso.service.LobbyService;
 import horenso.service.WebsocketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -26,9 +24,7 @@ import java.util.Map;
 @Component
 @RequiredArgsConstructor
 public class WebsocketEntrance extends TextWebSocketHandler {
-    private final LoginEndpoint loginEndpoint;
     private final LobbyEndpoint lobbyEndpoint;
-    private final LobbyService lobbyService;
     private final Gson gson;
     private final WebsocketService websocketService;
 
@@ -43,7 +39,7 @@ public class WebsocketEntrance extends TextWebSocketHandler {
             session.close();
             return;
         }
-        System.out.println("Got valid JSON:" + map.toString());
+        System.out.println("<< " + gson.toJson(map));
         System.out.println("Session attributes: " + session.getAttributes());
         String action = map.getOrDefault("action", null).toString();
         String dest = map.getOrDefault("dest", null).toString();
@@ -56,12 +52,15 @@ public class WebsocketEntrance extends TextWebSocketHandler {
             }
             switch (action) {
                 case "subscribe" -> {
-                    websocketService.subscribe(session, dest);
-                    if (dest.equals("table_list_updates")) {
-                        lobbyService.subscribeToTableUpdates(session);
-                    } else if (dest.matches("table_(%d)+")) {
-                        // TODO:
-                    }
+//                    if (dest.equals("table_list")) {
+//                        lobbyService.subscribeToTableUpdates(session);
+//                    }
+//                    if (dest.matches("table_(%d)+")) {
+//                        lobbyService.subscribeToTableUpdates(session);
+//                    } else {
+//                        throw new ErrorResponseException(dest,
+//                                String.format("%s is not a valid subscription", dest), true);
+//                    }
                 }
                 case "unsubscribe" -> websocketService.unsubscribe(session, dest);
                 case "send" -> handleSend(session, jsonString, dest);
@@ -78,8 +77,8 @@ public class WebsocketEntrance extends TextWebSocketHandler {
     private void handleSend(WebSocketSession session, String jsonString, String dest)
             throws ErrorResponseException {
         switch (dest) {
-            case "login" -> {
-                Response r = loginEndpoint.login(session, gson.fromJson(jsonString, LoginRequest.class));
+            case "table_list" -> {
+                Response r = lobbyEndpoint.getTableList();
                 websocketService.sendToOneSession(session, r);
             }
             case "join" -> {
@@ -91,7 +90,7 @@ public class WebsocketEntrance extends TextWebSocketHandler {
     }
 
     @Override
-    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+    public void afterConnectionEstablished(WebSocketSession session) {
         System.out.println("Connection has been established");
     }
 }

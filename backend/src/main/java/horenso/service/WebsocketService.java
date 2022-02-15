@@ -1,6 +1,6 @@
 package horenso.service;
 
-import horenso.endpoint.response.Response;
+import horenso.endpoint.websocket.response.Response;
 import org.springframework.web.socket.WebSocketSession;
 
 public interface WebsocketService {
