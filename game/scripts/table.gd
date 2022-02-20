@@ -1,5 +1,7 @@
 extends Control
 
+onready var websocket_handler = $"/root/WebsocketHandler"
+
 # These must be set before initiating the scene
 var table_id = null
 var table_id_str = null
@@ -11,12 +13,12 @@ func _ready():
 	$Label.text = "%s (%s)" % [table_name, table_id_str]
 	var sub_rquest = {"action": "subscribe", "dest": table_id_str}
 #	$"/root/WebsocketHandler".connect(_table_id_str, self, "_on_opened_table", [], CONNECT_ONESHOT)
-	$"/root/WebsocketHandler".send_request(sub_rquest)
+	websocket_handler.send_request(sub_rquest, self, "_on_opened_tbale", true)
 
 
 func _exit_tree():
 	var unsub_rquest = {"action": "unsubscribe", "dest": table_id_str}
-	$"/root/WebsocketHandler".send_request(unsub_rquest)
+	websocket_handler.send_request(unsub_rquest)
 
 
 func _on_LeaveButton_pressed():

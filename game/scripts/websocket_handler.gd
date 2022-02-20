@@ -5,7 +5,6 @@ const URL = "ws://localhost:8080/"
 
 var _client = WebSocketClient.new()
 var is_connected: bool = false
-var is_logged_in: bool = false
 var _token = null
 
 signal connected

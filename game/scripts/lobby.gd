@@ -11,12 +11,6 @@ func _ready():
 	websocket_handler.send_request(sub_rquest, self, "_on_table_list_update", true)
 
 
-func _exit_tree():
-#	var unsub_rquest = {"action": "unsubscribe", "dest": "table_list"}
-#	websocket_handler.send_request(unsub_rquest)
-	pass
-
-
 func _on_table_list_update(payload: Dictionary):
 	table_list.update_tables(payload)
 
