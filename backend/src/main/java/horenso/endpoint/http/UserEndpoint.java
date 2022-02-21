@@ -31,7 +31,7 @@ public class UserEndpoint {
     public TokenDto login(@RequestBody UserDto userDto) {
         try {
             String token = userService.getToken(userDto.getUsername(), userDto.getPassword());
-            return new TokenDto(token);
+            return new TokenDto(userDto.getUsername(), token);
         } catch (InvalidCredentialsException e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }

@@ -8,5 +8,5 @@ public interface UserService {
 
     String getToken(String username, String password) throws InvalidCredentialsException;
 
-    boolean verifyToken(String token);
+    boolean verifyUserToken(String username, String token);
 }

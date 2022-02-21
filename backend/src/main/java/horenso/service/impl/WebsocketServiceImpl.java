@@ -1,30 +1,28 @@
 package horenso.service.impl;
 
 import com.google.gson.Gson;
+import horenso.endpoint.websocket.WebsocketSessionManager;
 import horenso.endpoint.websocket.response.Response;
 import horenso.service.WebsocketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
-
-import java.io.IOException;
-import java.io.UncheckedIOException;
 
 @Service
 @RequiredArgsConstructor
 public class WebsocketServiceImpl implements WebsocketService {
+    private final WebsocketSessionManager websocketSessionManager;
     private final Gson gson;
 
     @Override
-    public void sendToOneSession(WebSocketSession session, Response response) {
-        try {
-            String message = gson.toJson(response);
-            session.sendMessage(new TextMessage(message));
-            System.out.println(">> " + message);
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
+    public void sendToOneUser(String username, Response response) {
+//        try {
+//            String message = gson.toJson(response);
+//            session.sendMessage(new TextMessage(message));
+//            System.out.println(">> " + message);
+//        } catch (IOException e) {
+//            throw new UncheckedIOException(e);
+//        }
     }
 
     @Override

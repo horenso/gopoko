@@ -2,6 +2,7 @@ package horenso.config;
 
 import horenso.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.stereotype.Component;
@@ -17,12 +18,19 @@ public class VerifyTokenInterceptor implements HandshakeInterceptor {
 
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response,
-                                   WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
-        String token = request.getHeaders().getFirst("token");
-        if (token == null) {
+                                   WebSocketHandler wsHandler, Map<String, Object> attributes) {
+        HttpHeaders headers = request.getHeaders();
+        String username = headers.getFirst("username");
+        String token = headers.getFirst("token");
+        if (username == null || token == null) {
             return false;
         }
-        return userService.verifyToken(token);
+        if (!userService.verifyUserToken(username, token)) {
+            return false;
+        }
+        attributes.put("username", username);
+        attributes.put("token", token);
+        return true;
     }
 
     @Override

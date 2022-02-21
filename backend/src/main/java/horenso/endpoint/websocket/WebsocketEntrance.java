@@ -3,12 +3,12 @@ package horenso.endpoint.websocket;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import horenso.endpoint.websocket.request.JoinRequest;
-import horenso.endpoint.websocket.response.ErrorResponse;
 import horenso.endpoint.websocket.response.Response;
 import horenso.exceptions.ErrorResponseException;
 import horenso.service.WebsocketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
@@ -27,6 +27,7 @@ public class WebsocketEntrance extends TextWebSocketHandler {
     private final LobbyEndpoint lobbyEndpoint;
     private final Gson gson;
     private final WebsocketService websocketService;
+    private final WebsocketSessionManager websocketSessionManager;
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
@@ -35,7 +36,7 @@ public class WebsocketEntrance extends TextWebSocketHandler {
         try {
             map = gson.fromJson(jsonString, Map.class);
         } catch (JsonSyntaxException e) {
-            websocketService.sendToOneSession(session, new ErrorResponse("/", "invalid JSON"));
+//            websocketService.sendToOneUser(, session, new ErrorResponse("/", "invalid JSON"));
             session.close();
             return;
         }
@@ -67,7 +68,7 @@ public class WebsocketEntrance extends TextWebSocketHandler {
                 default -> throw new ErrorResponseException("/", "invalid action", true);
             }
         } catch (ErrorResponseException e) {
-            websocketService.sendToOneSession(session, new ErrorResponse(e.getDest(), e.getError()));
+//            websocketService.sendToOneUser(, session, new ErrorResponse(e.getDest(), e.getError()));
             if (e.isDisconnect()) {
                 session.close();
             }
@@ -79,11 +80,11 @@ public class WebsocketEntrance extends TextWebSocketHandler {
         switch (dest) {
             case "table_list" -> {
                 Response r = lobbyEndpoint.getTableList();
-                websocketService.sendToOneSession(session, r);
+//                websocketService.sendToOneUser(, session, r);
             }
             case "join" -> {
                 Response r = lobbyEndpoint.joinTable(session, gson.fromJson(jsonString, JoinRequest.class));
-                websocketService.sendToOneSession(session, r);
+//                websocketService.sendToOneUser(, session, r);
             }
             default -> throw new ErrorResponseException("/", String.format("dest \"%s\" invalid", dest), true);
         }
@@ -92,5 +93,11 @@ public class WebsocketEntrance extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
         System.out.println("Connection has been established");
+        websocketSessionManager.addSession(session);
+    }
+
+    @Override
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
+        websocketSessionManager.removeSession(session);
     }
 }

@@ -15,5 +15,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     Optional<User> findFirstByNameAndPassword(String name, String password);
 
-    boolean existsByToken(String token);
+    boolean existsByNameAndToken(String name, String token);
 }

@@ -4,7 +4,7 @@ import horenso.endpoint.websocket.response.Response;
 import org.springframework.web.socket.WebSocketSession;
 
 public interface WebsocketService {
-    void sendToOneSession(WebSocketSession session, Response response);
+    void sendToOneUser(String username, Response response);
 
     void broadcast(String room, Response response);
 

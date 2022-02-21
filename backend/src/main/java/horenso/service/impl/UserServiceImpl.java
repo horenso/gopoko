@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean verifyToken(String token) {
-        return userRepository.existsByToken(token);
+    public boolean verifyUserToken(String username, String token) {
+        return userRepository.existsByNameAndToken(username, token);
     }
 }
