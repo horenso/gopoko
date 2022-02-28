@@ -1,6 +1,5 @@
 package horenso.service.impl;
 
-import horenso.model.Table;
 import horenso.persistence.entity.HoldemTable;
 import horenso.persistence.repository.HoldemTableRepository;
 import horenso.service.LobbyService;
@@ -22,13 +21,9 @@ public class LobbyServiceImpl implements LobbyService {
     }
 
     @Override
-    public void addTable(Table table) {
-//        Optional<Table> tableWithSameName = TABLE_DTO_LIST.stream().filter(t -> t.getName() == table.getName()).findFirst();
-//        if (tableWithSameName.isPresent()) {
-//            System.out.println(String.format("HoldemTable with name %s already existed", table.getName()));
-//            return;
-//        }
-//        websocketService.createRoom(String.format("table_%d", table.getId()));
-//        TABLE_DTO_LIST.add(table);
+    public void createTable() {
+        HoldemTable table = new HoldemTable();
+        table.setName("Test");
+        holdemTableRepository.save(table);
     }
 }

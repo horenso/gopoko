@@ -12,12 +12,14 @@ var _token = null
 signal connected
 signal disconnected
 
+signal chat_message
+
 
 func _ready():
 	_client.connect("connection_closed", self, "_closed")
 	_client.connect("connection_error", self, "_closed_with_error")
 	_client.connect("connection_established", self, "_connected")
-	_client.connect("data_received", self, "_on_response")
+	_client.connect("data_received", self, "_on_receive")
 
 
 func init_connection(username: String, token: String):
@@ -59,7 +61,7 @@ func send_request(request: Dictionary):
 	_client.get_peer(1).put_packet(payload.to_utf8())
 	print(">> ", payload)
 
-func _on_response():
+func _on_receive():
 	var raw_data = _client.get_peer(1).get_packet().get_string_from_utf8()
 	var response: Dictionary = JSON.parse(raw_data).result
 	print("<< ", JSON.print(response))
@@ -67,7 +69,7 @@ func _on_response():
 	if has_signal(dest):
 		emit_signal(dest, response)
 	else:
-		print("signal %s doesn't exist" % [dest])
+		print("Signal %s doesn't exist." % [dest])
 
 
 func _process(_delta):

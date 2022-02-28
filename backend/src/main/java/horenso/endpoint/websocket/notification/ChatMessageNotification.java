@@ -1,12 +1,16 @@
 package horenso.endpoint.websocket.notification;
 
-import horenso.model.ChatMessage;
+import java.time.LocalDateTime;
 
 public class ChatMessageNotification extends Notification {
-    private ChatMessage chatMessage;
+    private final String sender;
+    private final String message;
+    private final LocalDateTime time;
 
-    public ChatMessageNotification(ChatMessage chatMessage) {
+    public ChatMessageNotification(String sender, String message, LocalDateTime time) {
         super("chat_message", true);
-        this.chatMessage = chatMessage;
+        this.sender = sender;
+        this.message = message;
+        this.time = time;
     }
 }

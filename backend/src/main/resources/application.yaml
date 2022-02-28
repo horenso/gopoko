@@ -18,3 +18,5 @@ spring:
       settings:
         trace: false
         web-allow-others: false
+  gson:
+    date-format: "yyyy-MM-dd"

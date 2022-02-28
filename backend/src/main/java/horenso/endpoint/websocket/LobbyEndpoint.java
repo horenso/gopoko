@@ -7,7 +7,6 @@ import horenso.service.LobbyService;
 import horenso.service.TableService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.web.socket.WebSocketSession;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,7 +27,7 @@ public class LobbyEndpoint {
         return new TableListNotification(tableList);
     }
 
-    public synchronized void joinTable(WebSocketSession session) {
+    public void createTable() {
+        lobbyService.createTable();
     }
-
 }

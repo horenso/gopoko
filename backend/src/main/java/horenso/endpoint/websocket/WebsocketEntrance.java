@@ -57,6 +57,9 @@ public class WebsocketEntrance extends TextWebSocketHandler {
                     Notification n = lobbyEndpoint.getTableList();
                     websocketSessionManager.sendToOneSession(session, n);
                 }
+                case "create_table" -> {
+                    lobbyEndpoint.createTable();
+                }
                 case "start_observing_table" -> {
                     tableEndpoint.startObservingTable(session, gson.fromJson(jsonString, ObservingRequest.class));
                 }

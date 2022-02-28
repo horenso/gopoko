@@ -52,7 +52,7 @@ public class WebsocketSessionManager {
     }
 
     public void sendToUser(String username, Notification notification) {
-        List<WebSocketSession> sessionList = userSessions.get("username");
+        List<WebSocketSession> sessionList = userSessions.get(username);
         if (sessionList != null) {
             sessionList.forEach(session -> {
                 try {

@@ -10,6 +10,12 @@ import java.util.List;
 
 @Repository
 public interface ObservingUserRepository extends CrudRepository<ObservingUser, ObservingUserKey> {
-    @Query("select u from ObservingUser u where u.id.holdemTableId = :id")
-    List<ObservingUser> findSeatedUsersByHoldemTableId(long id);
+    @Query("""
+              select u.name
+              from ObservingUser o
+              inner join User u
+              on o.id.userId = u.id
+              where o.id.holdemTableId = :tableId
+            """)
+    List<String> findUsernamesOfSeatedUsers(long tableId);
 }
