@@ -6,6 +6,8 @@
 [node name="Lobby" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 1.18921
+margin_right = 1.18921
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -27,4 +29,23 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="NewTableButton" type="Button" parent="."]
+margin_left = 889.527
+margin_top = 13.0813
+margin_right = 967.527
+margin_bottom = 33.0813
+text = "New Table"
+
+[node name="UpdateListButton" type="Button" parent="."]
+margin_left = 787.255
+margin_top = 13.0813
+margin_right = 865.255
+margin_bottom = 33.0813
+text = "Update"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="item_activated" from="TableList" to="." method="_on_TableList_item_activated"]
+[connection signal="pressed" from="NewTableButton" to="." method="_on_NewTableButton_pressed"]
+[connection signal="pressed" from="UpdateListButton" to="." method="_on_UpdateListButton_pressed"]

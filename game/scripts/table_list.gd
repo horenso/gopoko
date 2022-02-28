@@ -3,6 +3,7 @@ extends Tree
 var root = null
 onready var websocket_handler = $"/root/WebsocketHandler"
 
+
 func _ready():
 	columns = 3
 	set_hide_root(true)
@@ -26,6 +27,7 @@ func update_tables(payload: Dictionary):
 	# The lobby will be reworked anyway
 	# but it would be nice to update the Tree Node instread of just
 	# replacing all entries
+	clear()
 	root = create_item()
 	for table in payload["tables"]:
 		add_table(table["id"], table["name"])

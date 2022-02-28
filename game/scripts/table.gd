@@ -32,5 +32,9 @@ func _on_message_sent(message: String):
 
 
 func _on_message_received(payload: Dictionary):
-	chat_ui.show_message(payload['sender'], payload['message'])
-	print("sender " + payload['sender'] + " sent: '%s'" % [payload['message']])
+	var sender
+	if payload["sender"] == websocket_handler.get_username():
+		sender = "You"
+	else:
+		sender = payload["sender"]
+	chat_ui.show_message(sender, payload["message"])

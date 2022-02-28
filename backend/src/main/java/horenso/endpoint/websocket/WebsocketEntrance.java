@@ -7,8 +7,6 @@ import horenso.endpoint.websocket.notification.Notification;
 import horenso.endpoint.websocket.request.ChatMessageRequest;
 import horenso.endpoint.websocket.request.ObservingRequest;
 import horenso.exceptions.ErrorResponseException;
-import horenso.persistence.repository.ObservingUserRepository;
-import horenso.service.WebsocketManagerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
@@ -30,10 +28,7 @@ public class WebsocketEntrance extends TextWebSocketHandler {
     private final LobbyEndpoint lobbyEndpoint;
     private final TableEndpoint tableEndpoint;
     private final Gson gson;
-    private final WebsocketManagerService websocketService;
     private final WebsocketSessionManager websocketSessionManager;
-
-    private final ObservingUserRepository observingUserRepository;
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {

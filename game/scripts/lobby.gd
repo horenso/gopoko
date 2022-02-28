@@ -7,6 +7,10 @@ const Table = preload("res://scenes/table.tscn")
 
 
 func _ready():
+	_update_table_list()
+
+
+func _update_table_list():
 	var sub_rquest = {"dest": "get_table_list"}
 	websocket_handler.send_request_with_callback(sub_rquest, self, "_on_table_list_update", true)
 
@@ -35,3 +39,12 @@ func _open_table(table_id: int, table_name: String):
 	root.add_child(table_instance)
 	get_tree().set_current_scene(table_instance)
 	lobby.queue_free()
+
+
+func _on_NewTableButton_pressed():
+	var request = {"dest": "create_table"}
+	websocket_handler.send_request(request)
+
+
+func _on_UpdateListButton_pressed():
+	_update_table_list()
