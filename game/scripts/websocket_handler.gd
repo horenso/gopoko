@@ -5,6 +5,8 @@ const URL = "ws://localhost:8080/"
 
 var _client = WebSocketClient.new()
 var is_connected: bool = false
+
+var _username = null
 var _token = null
 
 signal connected
@@ -18,11 +20,13 @@ func _ready():
 	_client.connect("data_received", self, "_on_response")
 
 
-func init_connection(token: String):
+func init_connection(username: String, token: String):
 	# Save the token for reconnects
+	_username = username
 	_token = token
+	var username_header = 'username: %s' % [username]
 	var token_header = 'token: %s' % [token]
-	var err = _client.connect_to_url(URL, [], false, [token_header])
+	var err = _client.connect_to_url(URL, [], false, [username_header, token_header])
 	if err == OK:
 		is_connected = true
 	else:
@@ -30,25 +34,30 @@ func init_connection(token: String):
 		# TODO: Try to reconnect
 
 
-func send_request(request: Dictionary, node: Node, callback_fn: String, one_shot: bool):
+func send_request_with_callback(request: Dictionary, node: Node, fn: String, one_shot: bool):
 	if not is_connected:
 		print("not connected...")
 		return
 		# TODO: What happens when we aren"t connected?
 		# Maybe save requests in a queue? Or forget about them?
-	var payload = JSON.print(request)
-	print(">> ", payload)
 	var dest = request['dest']
 	if not has_signal(dest):
 		print("created signal ", dest)
 		add_user_signal(dest)
 	if one_shot:
-		connect(dest, node, callback_fn, [], CONNECT_ONESHOT)
+		connect(dest, node, fn, [], CONNECT_ONESHOT)
 	else:
-		connect(dest, node, callback_fn)
+		connect(dest, node, fn)
 		
-	_client.get_peer(1).put_packet(payload.to_utf8())
+	send_request(request)
 
+func send_request(request: Dictionary):
+	if not is_connected:
+		print("not connected...")
+		return
+	var payload = JSON.print(request)
+	_client.get_peer(1).put_packet(payload.to_utf8())
+	print(">> ", payload)
 
 func _on_response():
 	var raw_data = _client.get_peer(1).get_packet().get_string_from_utf8()

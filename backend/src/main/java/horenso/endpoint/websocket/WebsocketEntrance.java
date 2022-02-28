@@ -2,10 +2,13 @@ package horenso.endpoint.websocket;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import horenso.endpoint.websocket.request.JoinRequest;
-import horenso.endpoint.websocket.response.Response;
+import horenso.endpoint.websocket.notification.ErrorNotification;
+import horenso.endpoint.websocket.notification.Notification;
+import horenso.endpoint.websocket.request.ChatMessageRequest;
+import horenso.endpoint.websocket.request.ObservingRequest;
 import horenso.exceptions.ErrorResponseException;
-import horenso.service.WebsocketService;
+import horenso.persistence.repository.ObservingUserRepository;
+import horenso.service.WebsocketManagerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
@@ -21,13 +24,16 @@ import java.util.Map;
  * requests to different endpoints.
  */
 
-@Component
 @RequiredArgsConstructor
+@Component
 public class WebsocketEntrance extends TextWebSocketHandler {
     private final LobbyEndpoint lobbyEndpoint;
+    private final TableEndpoint tableEndpoint;
     private final Gson gson;
-    private final WebsocketService websocketService;
+    private final WebsocketManagerService websocketService;
     private final WebsocketSessionManager websocketSessionManager;
+
+    private final ObservingUserRepository observingUserRepository;
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
@@ -36,57 +42,37 @@ public class WebsocketEntrance extends TextWebSocketHandler {
         try {
             map = gson.fromJson(jsonString, Map.class);
         } catch (JsonSyntaxException e) {
-//            websocketService.sendToOneUser(, session, new ErrorResponse("/", "invalid JSON"));
+            websocketSessionManager.sendToOneSession(session, new ErrorNotification("/", "invalid JSON"));
             session.close();
             return;
         }
         System.out.println("<< " + gson.toJson(map));
-        System.out.println("Session attributes: " + session.getAttributes());
-        String action = map.getOrDefault("action", null).toString();
         String dest = map.getOrDefault("dest", null).toString();
         try {
-            if (action == null) {
-                throw new ErrorResponseException("/", "field \"action\" is missing", true);
-            }
             if (dest == null) {
                 throw new ErrorResponseException("/", "field \"dest\" is missing", true);
             }
-            switch (action) {
-                case "subscribe" -> {
-//                    if (dest.equals("table_list")) {
-//                        lobbyService.subscribeToTableUpdates(session);
-//                    }
-//                    if (dest.matches("table_(%d)+")) {
-//                        lobbyService.subscribeToTableUpdates(session);
-//                    } else {
-//                        throw new ErrorResponseException(dest,
-//                                String.format("%s is not a valid subscription", dest), true);
-//                    }
+            switch (dest) {
+                case "get_table_list" -> {
+                    Notification n = lobbyEndpoint.getTableList();
+                    websocketSessionManager.sendToOneSession(session, n);
                 }
-                case "unsubscribe" -> websocketService.unsubscribe(session, dest);
-                case "send" -> handleSend(session, jsonString, dest);
-                default -> throw new ErrorResponseException("/", "invalid action", true);
+                case "start_observing_table" -> {
+                    tableEndpoint.startObservingTable(session, gson.fromJson(jsonString, ObservingRequest.class));
+                }
+                case "stop_observing_table" -> {
+                    tableEndpoint.stopObservingTable(session, gson.fromJson(jsonString, ObservingRequest.class));
+                }
+                case "send_message" -> {
+                    tableEndpoint.sendMessage(session, gson.fromJson(jsonString, ChatMessageRequest.class));
+                }
+                default -> throw new ErrorResponseException("/", String.format("dest \"%s\" invalid", dest), true);
             }
         } catch (ErrorResponseException e) {
-//            websocketService.sendToOneUser(, session, new ErrorResponse(e.getDest(), e.getError()));
+            websocketSessionManager.sendToOneSession(session, new ErrorNotification(e.getDest(), e.getError()));
             if (e.isDisconnect()) {
                 session.close();
             }
-        }
-    }
-
-    private void handleSend(WebSocketSession session, String jsonString, String dest)
-            throws ErrorResponseException {
-        switch (dest) {
-            case "table_list" -> {
-                Response r = lobbyEndpoint.getTableList();
-//                websocketService.sendToOneUser(, session, r);
-            }
-            case "join" -> {
-                Response r = lobbyEndpoint.joinTable(session, gson.fromJson(jsonString, JoinRequest.class));
-//                websocketService.sendToOneUser(, session, r);
-            }
-            default -> throw new ErrorResponseException("/", String.format("dest \"%s\" invalid", dest), true);
         }
     }
 

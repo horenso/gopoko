@@ -27,7 +27,7 @@ What the server does with a subscription depends on the `dest` again, for the `l
 the server changes, starting by sending the entire list. In case of a game table the server may send the current state
 of the game, but e.g no chat messages.
 
-At this time the client follows the following pattern to waits for single response messages:
+At this time the client follows the following pattern to waits for single notification messages:
 
 ```
 func _login_request(username):

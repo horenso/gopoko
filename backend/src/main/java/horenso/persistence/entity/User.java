@@ -1,16 +1,12 @@
 package horenso.persistence.entity;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
-@Getter
-@Setter
-@EqualsAndHashCode
+@Data
 @Entity
 public class User implements Serializable {
     @Id
@@ -27,7 +23,7 @@ public class User implements Serializable {
     private String token;
 
     @OneToMany(mappedBy = "user")
-    private Set<SeatedUser> observingTables;
+    private Set<ObservingUser> observingTables;
 
     public User() {
     }

@@ -17,5 +17,5 @@ public class HoldemTable implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "holdemTable")
-    private Set<SeatedUser> observingUsers;
+    private Set<ObservingUser> observingUsers;
 }

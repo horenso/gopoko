@@ -1,5 +1,7 @@
 extends Panel
 
+signal message_sent
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,6 +17,7 @@ func send_message(message: String):
 		return
 	$Rows/SendRow/MessageInput.text = ""
 	$Rows/Messages.bbcode_text += "[color=#03d3fc][You] %s\n[/color]" % [message]
+	emit_signal("message_sent", message)
 
 
 func _on_SendButton_pressed():

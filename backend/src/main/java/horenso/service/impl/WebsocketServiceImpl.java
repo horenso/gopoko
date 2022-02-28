@@ -2,22 +2,22 @@ package horenso.service.impl;
 
 import com.google.gson.Gson;
 import horenso.endpoint.websocket.WebsocketSessionManager;
-import horenso.endpoint.websocket.response.Response;
-import horenso.service.WebsocketService;
+import horenso.endpoint.websocket.notification.Notification;
+import horenso.service.WebsocketManagerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.WebSocketSession;
 
 @Service
 @RequiredArgsConstructor
-public class WebsocketServiceImpl implements WebsocketService {
+public class WebsocketServiceImpl implements WebsocketManagerService {
     private final WebsocketSessionManager websocketSessionManager;
     private final Gson gson;
 
     @Override
-    public void sendToOneUser(String username, Response response) {
+    public void sendToOneUser(String username, Notification notification) {
 //        try {
-//            String message = gson.toJson(response);
+//            String message = gson.toJson(notification);
 //            session.sendMessage(new TextMessage(message));
 //            System.out.println(">> " + message);
 //        } catch (IOException e) {
@@ -26,12 +26,12 @@ public class WebsocketServiceImpl implements WebsocketService {
     }
 
     @Override
-    public void broadcast(String room, Response response) {
+    public void broadcast(String room, Notification notification) {
 //        List<WebSocketSession> sessionList = subscriptions.getOrDefault(room, null);
 //        if (sessionList == null) {
 //            System.out.println(String.format("tried to broadcast to none existent: %s", room));
 //        }
-//        sessionList.forEach(session -> sendToOneSession(session, response));
+//        sessionList.forEach(session -> sendToOneSession(session, notification));
     }
 
     @Override

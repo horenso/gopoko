@@ -7,8 +7,8 @@ const Table = preload("res://scenes/table.tscn")
 
 
 func _ready():
-	var sub_rquest = {"action": "send", "dest": "table_list"}
-	websocket_handler.send_request(sub_rquest, self, "_on_table_list_update", true)
+	var sub_rquest = {"dest": "get_table_list"}
+	websocket_handler.send_request_with_callback(sub_rquest, self, "_on_table_list_update", true)
 
 
 func _on_table_list_update(payload: Dictionary):
@@ -29,7 +29,6 @@ func _open_table(table_id: int, table_name: String):
 	# I want to assign some properties now:
 	table_instance.table_id = table_id
 	table_instance.table_name = table_name
-	table_instance.table_id_str = "table_%d" % [table_id]
 
 	var root = get_tree().root
 	var lobby = root.get_node("Lobby")

@@ -10,7 +10,6 @@ func _ready():
 	set_column_title(0, "ID")
 	set_column_title(1, "Table Name")
 	set_column_title(2, "Players")
-	websocket_handler.connect("table_list", self, "_update_tables")
 
 
 func add_table(id: int, name: String):

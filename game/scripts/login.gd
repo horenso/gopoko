@@ -63,7 +63,9 @@ func _on_login_response(result, response_code, headers, body):
 	var json_result = JSON.parse(body.get_string_from_utf8()).result
 	if response_code == HTTPClient.RESPONSE_OK:
 		websocket_handler.connect("connected", self, "_on_connected")
-		websocket_handler.init_connection(json_result["token"])
+		var username = json_result["username"]
+		var token = json_result["token"]
+		websocket_handler.init_connection(username, token)
 	else:
 		error_label.text = json_result["message"]
 

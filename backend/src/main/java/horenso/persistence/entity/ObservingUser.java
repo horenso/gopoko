@@ -7,19 +7,18 @@ import java.io.Serializable;
 
 @Data
 @Entity
-public class SeatedUser implements Serializable {
+public class ObservingUser implements Serializable {
     @EmbeddedId
-    private SeatedUserKey id;
+    private ObservingUserKey id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("holdemTableId")
-    @JoinColumn(name = "holdem_table_id")
     private HoldemTable holdemTable;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("userId")
-    @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(name = "seat_number")
     private Short seatNumber;
 }

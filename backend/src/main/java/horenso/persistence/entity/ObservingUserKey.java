@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 @Data
 @Embeddable
-public class SeatedUserKey implements Serializable {
+public class ObservingUserKey implements Serializable {
     @Column(name = "holdem_table_id")
     private Long holdemTableId;
 
