@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8000
 spring:
   datasource:
     url: jdbc:h2:mem:testdb
@@ -17,6 +17,6 @@ spring:
       path: /db
       settings:
         trace: false
-        web-allow-others: false
+        web-allow-others: true
   gson:
     date-format: "yyyy-MM-dd"

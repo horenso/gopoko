@@ -1,6 +1,6 @@
 extends Sprite
 
-const path_fmt = "res://cards/%s-%s.png"
+const path_fmt = "res://img/cards/%s-%s.png"
 
 enum Suit { diamonds, clubs, hearts, spades }
 enum Value { two, three, four, five, six, seven, eight, nine, ten, jack, queen, king, ace }

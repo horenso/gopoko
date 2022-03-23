@@ -6,8 +6,6 @@ onready var password_field = $"Rows/PasswordField"
 onready var error_label = $"Rows/ErrorLabel"
 onready var http_request = $"Rows/HTTPRequest"
 
-const URL = "http://localhost:8080"
-
 
 func _ready():
 	username_field.grab_focus()
@@ -17,9 +15,9 @@ func _on_RegisterButton_pressed():
 	var username = username_field.text
 	var password = password_field.text
 	var register_request = {"username": username, "password": password}
-	http_request.connect("request_completed", self, "_on_register_result", [], CONNECT_ONESHOT)	
+	http_request.connect("request_completed", self, "_on_register_result", [], CONNECT_ONESHOT)
 	var result = http_request.request(
-		URL + "/users",
+		websocket_handler.HTTP_URL + "/users",
 		["content-type: application/json"],
 		false,
 		HTTPClient.METHOD_POST,
@@ -30,10 +28,10 @@ func _on_RegisterButton_pressed():
 func _on_LoginButton_pressed():
 	var username = username_field.text
 	var password = password_field.text
-	var login_request = { "username": username, "password": password }
-	http_request.connect("request_completed", self, "_on_login_response", [], CONNECT_ONESHOT)	
+	var login_request = {"username": username, "password": password}
+	http_request.connect("request_completed", self, "_on_login_response", [], CONNECT_ONESHOT)
 	http_request.request(
-		URL + "/users",
+		websocket_handler.HTTP_URL + "/users",
 		["content-type: application/json"],
 		false,
 		HTTPClient.METHOD_GET,

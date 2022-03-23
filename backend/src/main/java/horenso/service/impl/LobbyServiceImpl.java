@@ -24,6 +24,7 @@ public class LobbyServiceImpl implements LobbyService {
     public void createTable() {
         HoldemTable table = new HoldemTable();
         table.setName("Test");
+        table.setNumberOfUsers(6);
         holdemTableRepository.save(table);
     }
 }

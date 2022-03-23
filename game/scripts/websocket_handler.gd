@@ -1,6 +1,11 @@
 extends Node
 
-const URL = "ws://localhost:8080/"
+# Hosted version: 
+# const WEBSOCKET_URL = "wss://poker.horenso.dev/"
+# const HTTP_URL = "https://poker.horenso.dev/"
+
+const WEBSOCKET_URL = "ws://localhost:8000/"
+const HTTP_URL = "http://localhost:8000/"
 
 var _client = WebSocketClient.new()
 var is_connected: bool = false
@@ -12,6 +17,7 @@ signal connected
 signal disconnected
 
 signal chat_message
+signal user_seated
 
 
 func _ready():
@@ -27,7 +33,7 @@ func init_connection(username: String, token: String):
 	_token = token
 	var username_header = "username: %s" % [username]
 	var token_header = "token: %s" % [token]
-	var err = _client.connect_to_url(URL, [], false, [username_header, token_header])
+	var err = _client.connect_to_url(WEBSOCKET_URL, [], false, [username_header, token_header])
 	if err == OK:
 		is_connected = true
 	else:

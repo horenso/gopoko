@@ -3,9 +3,11 @@ package horenso.endpoint.websocket;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import horenso.endpoint.websocket.notification.ErrorNotification;
-import horenso.endpoint.websocket.notification.Notification;
+import horenso.endpoint.websocket.notification.ObservingTableNotification;
+import horenso.endpoint.websocket.notification.TableListNotification;
 import horenso.endpoint.websocket.request.ChatMessageRequest;
 import horenso.endpoint.websocket.request.ObservingRequest;
+import horenso.endpoint.websocket.request.TakeSeatRequest;
 import horenso.exceptions.ErrorResponseException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -49,17 +51,22 @@ public class WebsocketEntrance extends TextWebSocketHandler {
             }
             switch (dest) {
                 case "get_table_list" -> {
-                    Notification n = lobbyEndpoint.getTableList();
-                    websocketSessionManager.sendToOneSession(session, n);
+                    TableListNotification notification = lobbyEndpoint.getTableList();
+                    websocketSessionManager.sendToOneSession(session, notification);
                 }
                 case "create_table" -> {
                     lobbyEndpoint.createTable();
                 }
                 case "start_observing_table" -> {
-                    tableEndpoint.startObservingTable(session, gson.fromJson(jsonString, ObservingRequest.class));
+                    ObservingTableNotification notification =
+                        tableEndpoint.startObservingTable(session, gson.fromJson(jsonString, ObservingRequest.class));
+                    websocketSessionManager.sendToOneSession(session, notification);
                 }
                 case "stop_observing_table" -> {
                     tableEndpoint.stopObservingTable(session, gson.fromJson(jsonString, ObservingRequest.class));
+                }
+                case "take_seat" -> {
+                    tableEndpoint.takeSeat(session, gson.fromJson(jsonString, TakeSeatRequest.class));
                 }
                 case "send_message" -> {
                     tableEndpoint.sendMessage(session, gson.fromJson(jsonString, ChatMessageRequest.class));

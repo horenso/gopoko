@@ -19,6 +19,7 @@ public class VerifyTokenInterceptor implements HandshakeInterceptor {
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response,
                                    WebSocketHandler wsHandler, Map<String, Object> attributes) {
+        System.out.println("beforeHandshake");
         HttpHeaders headers = request.getHeaders();
         String username = headers.getFirst("username");
         String token = headers.getFirst("token");

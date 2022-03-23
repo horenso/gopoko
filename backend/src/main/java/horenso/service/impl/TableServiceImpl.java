@@ -2,10 +2,14 @@ package horenso.service.impl;
 
 import horenso.endpoint.websocket.WebsocketSessionManager;
 import horenso.endpoint.websocket.notification.ChatMessageNotification;
+import horenso.endpoint.websocket.notification.UserSeatedNotification;
 import horenso.exceptions.InvalidTableIdException;
+import horenso.exceptions.SeatOccupiedException;
 import horenso.model.ChatMessage;
+import horenso.model.ObservingUser;
+import horenso.model.SeatedUser;
+import horenso.model.TableInfo;
 import horenso.persistence.entity.HoldemTable;
-import horenso.persistence.entity.ObservingUser;
 import horenso.persistence.entity.ObservingUserKey;
 import horenso.persistence.entity.User;
 import horenso.persistence.repository.HoldemTableRepository;
@@ -41,11 +45,43 @@ public class TableServiceImpl implements TableService {
         id.setHoldemTableId(tableId);
         id.setUserId(user.getId());
 
-        ObservingUser observingUser = new ObservingUser();
+        horenso.persistence.entity.ObservingUser observingUser = new horenso.persistence.entity.ObservingUser();
         observingUser.setId(id);
         observingUser.setUser(user);
         observingUser.setHoldemTable(table);
         observingUserRepository.save(observingUser);
+    }
+
+    @Override
+    public void seatUserOnTable(long tableId, short seat, String username) throws InvalidTableIdException,
+            SeatOccupiedException {
+        HoldemTable table = getTableFromTableId(tableId);
+        User user = userRepository.findFirstByName(username).get();
+
+        // Check if the seat is occupied
+        Optional<SeatedUser> userOnSeat = observingUserRepository.getSeatedUser(tableId, seat);
+        if (userOnSeat.isPresent()) {
+            throw new SeatOccupiedException(String.format("The seat %d on table %d is already occupied.",
+                    seat, tableId));
+        }
+
+        // Seat user
+        ObservingUserKey id = new ObservingUserKey();
+        id.setHoldemTableId(tableId);
+        id.setUserId(user.getId());
+
+        horenso.persistence.entity.ObservingUser observingUser = new horenso.persistence.entity.ObservingUser();
+        observingUser.setId(id);
+        observingUser.setUser(user);
+        observingUser.setHoldemTable(table);
+        observingUser.setSeatNumber(seat);
+        observingUserRepository.save(observingUser);
+
+        List<ObservingUser> usersOnTable = observingUserRepository.getObservingUser(tableId);
+        usersOnTable.forEach(u -> {
+            UserSeatedNotification userSeatedNotification = new UserSeatedNotification(tableId, username, seat);
+            websocketSessionManager.sendToUser(u.getUsername(), userSeatedNotification);
+        });
     }
 
     @Override
@@ -62,14 +98,26 @@ public class TableServiceImpl implements TableService {
     @Override
     public void sendChatMessage(long tableId, String username, String message) throws InvalidTableIdException {
         getTableFromTableId(tableId); // To assert that the table id is valid
-        List<String> usernames = observingUserRepository.findUsernamesOfSeatedUsers(tableId);
+        List<ObservingUser> userList = observingUserRepository.getObservingUser(tableId);
         LocalDateTime now = LocalDateTime.now();
 //        LocalDateT
-        usernames.forEach(u -> {
+        userList.forEach(u -> {
             ChatMessageNotification notification = new ChatMessageNotification(username, message, now);
-            websocketSessionManager.sendToUser(u, notification);
+            websocketSessionManager.sendToUser(u.getUsername(), notification);
         });
-        System.out.println(usernames);
+        System.out.println(userList);
+    }
+
+    @Override
+    public List<SeatedUser> getSeatedUsers(long tableId) throws InvalidTableIdException {
+        getTableFromTableId(tableId);
+        return observingUserRepository.getSeatedUsers(tableId);
+    }
+
+    @Override
+    public TableInfo getTableInfo(long tableId) throws InvalidTableIdException {
+        HoldemTable table = getTableFromTableId(tableId);
+        return new TableInfo(table.getNumberOfUsers(), getSeatedUsers(tableId));
     }
 
     private HoldemTable getTableFromTableId(long tableId) throws InvalidTableIdException {
